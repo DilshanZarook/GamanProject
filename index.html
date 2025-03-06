@@ -1,0 +1,122 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Bus Logo">
+            </div>
+            <div class="nav-items">
+                <div class="nav-item active">
+                    <i class="fa-solid fa-home"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-route"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-building"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="notification">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name">Admin Name</span>
+                    <span class="language">En</span>
+                    <img src="images/slpng.jpeg" alt="Flag" class="flag">
+                </div>
+            </header>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="search-header">
+                    <h1>Search Result</h1>
+                    <p>17 Busses</p>
+                </div>
+
+                <div class="search-form">
+                    <div class="location-selectors">
+                        <div class="select-container">
+                            <label for="from-location">From:</label>
+                            <select id="from-location">
+                                <option value="Colombo">Colombo</option>
+                                <option value="Pettah">Pettah</option>
+                                <option value="Jaffna">Jaffna</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+
+                        <div class="direction-arrow">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+
+                        <div class="select-container">
+                            <label for="to-location">To:</label>
+                            <select id="to-location">
+                                <option value="Pettah">Pettah</option>
+                                <option value="Colombo">Colombo</option>
+                                <option value="Jaffna">Jaffna</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="date-picker">
+                        <label for="travel-date">Date:</label>
+                        <input type="date" id="travel-date" name="travel-date">
+                    </div>
+
+                    <div class="transport-options">
+                        <div class="mode-static">
+                            <div class="mode-option active" data-mode="bus">
+                                <i class="fa-solid fa-bus"></i>
+                                <span>Buses</span>
+                            </div>
+                        </div>
+
+                        <div class="bus-class">
+                            <span>Choose Class:</span>
+                            <div class="class-options">
+                                <button class="class-option" data-class="N">N</button>
+                                <button class="class-option" data-class="S">S</button>
+                                <button class="class-option" data-class="L">L</button>
+                                <button class="class-option" data-class="XL">XL</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="search-button" class="search-button">Search</button>
+                </div>
+
+                <!-- Search Results -->
+                <div id="search-results" class="search-results">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
