@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (failureReasons.length === 0) {
-                errorMessage = 'No buses found matching your criteria.';
+                errorMessage = 'No buses found matching your hello world.';
             } else if (failureReasons.length === 1) {
                 errorMessage = `${errorMessage} ${failureReasons[0]}.`;
             } else if (failureReasons.length === 2) {
