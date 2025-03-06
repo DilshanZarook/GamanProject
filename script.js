@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
             coffeeBreak: '2:00 PM',
             price: '2,500.00 LKR'
         },
-        
     ];
 
     // DOM Elements
@@ -120,11 +119,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const formattedDate = formatDate(date);
         console.log('Formatted Date:', formattedDate);
 
+        // Track failure reasons
+        let locationFailed = true;
+        let dateFailed = true;
+        let classFailed = selectedClass ? true : false; // Only track class failure if a class is selected
+
         // Filter buses based on selections
         const filteredBuses = buses.filter(bus => {
             const matchesLocation = bus.departure.location === from && bus.arrival.location === to;
             const matchesDate = bus.departure.date === formattedDate;
             const matchesClass = selectedClass ? bus.type.includes(`(${selectedClass})`) : true;
+
+            // Update failure flags based on each bus
+            if (matchesLocation) locationFailed = false;
+            if (matchesDate) dateFailed = false;
+            if (matchesClass) classFailed = false;
 
             // Log each bus's comparison results
             console.log('Bus:', bus.company, {
@@ -140,17 +149,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         console.log('Filtered Buses:', filteredBuses);
+        console.log('Failure Flags:', { locationFailed, dateFailed, classFailed });
 
         // Display results
-        filteredBuses.forEach(bus => {
-            const busItem = createBusItem(bus);
-            searchResults.appendChild(busItem);
-        });
+        if (filteredBuses.length > 0) {
+            filteredBuses.forEach(bus => {
+                const busItem = createBusItem(bus);
+                searchResults.appendChild(busItem);
+            });
+            searchResults.style.display = 'block';
+        } else {
+            // Construct specific error message based on failure reasons
+            let errorMessage = 'No buses found';
+            const failureReasons = [];
 
-        // Show results section
-        searchResults.style.display = filteredBuses.length > 0 ? 'block' : 'none';
-        if (filteredBuses.length === 0) {
-            searchResults.innerHTML = '<p>No buses found matching your criteria.</p>';
+            if (locationFailed) {
+                failureReasons.push('in specific location');
+            }
+            if (dateFailed) {
+                failureReasons.push('for the selected date');
+            }
+            if (classFailed && selectedClass) {
+                failureReasons.push('for the selected class');
+            }
+
+            if (failureReasons.length === 0) {
+                errorMessage = 'No buses found matching your criteria.';
+            } else if (failureReasons.length === 1) {
+                errorMessage = `${errorMessage} ${failureReasons[0]}.`;
+            } else if (failureReasons.length === 2) {
+                errorMessage = `${errorMessage} ${failureReasons[0]} and ${failureReasons[1]}.`;
+            } else {
+                // All three failed
+                errorMessage = 'No buses for selected city, date, and class.';
+            }
+
+            searchResults.innerHTML = `<p>${errorMessage}</p>`;
             searchResults.style.display = 'block';
         }
     });
