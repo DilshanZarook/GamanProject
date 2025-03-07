@@ -154,7 +154,7 @@ header {
     gap: 15px;
 }
 
-.select-container {
+.autocomplete-container {
     position: relative;
     width: 180px;
     display: flex;
@@ -162,28 +162,41 @@ header {
     gap: 5px;
 }
 
-.select-container label {
+.autocomplete-container label {
     font-size: 14px;
     color: var(--secondary-text);
 }
 
-.select-container select {
+.autocomplete-container input {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid var(--light-gray);
     border-radius: 5px;
-    appearance: none;
     font-size: 16px;
     background-color: var(--background-color);
 }
 
-.select-container i {
+.autocomplete-list {
     position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(10%);
-    color: var(--secondary-text);
-    pointer-events: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+}
+
+.autocomplete-list div {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.autocomplete-list div:hover {
+    background-color: var(--light-gray);
 }
 
 .direction-arrow {
@@ -197,18 +210,18 @@ header {
     color: var(--white);
 }
 
-.date-picker {
+.date-picker, .time-picker {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.date-picker label {
+.date-picker label, .time-picker label {
     font-size: 14px;
     color: var(--secondary-text);
 }
 
-.date-picker input[type="date"] {
+.date-picker input[type="date"], .time-picker input[type="time"] {
     padding: 8px;
     border: 1px solid var(--light-gray);
     border-radius: 5px;
@@ -275,19 +288,19 @@ header {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.class-option[data-class="N"] {
+.class-option[data-class="Normal"] {
     background-color: #FF7043;
 }
 
-.class-option[data-class="S"] {
+.class-option[data-class="Semi-Luxury"] {
     background-color: #F44336;
 }
 
-.class-option[data-class="L"] {
+.class-option[data-class="Luxury"] {
     background-color: #673AB7;
 }
 
-.class-option[data-class="XL"] {
+.class-option[data-class="Super Luxury"] {
     background-color: #2196F3;
 }
 

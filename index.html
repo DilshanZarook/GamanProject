@@ -52,39 +52,36 @@
             <div class="search-section">
                 <div class="search-header">
                     <h1>Search Result</h1>
-                    <p>17 Busses</p>
+                    <p>17 Buses</p>
                 </div>
 
                 <div class="search-form">
                     <div class="location-selectors">
-                        <div class="select-container">
+                        <div class="autocomplete-container">
                             <label for="from-location">From:</label>
-                            <select id="from-location">
-                                <option value="Colombo">Colombo</option>
-                                <option value="Pettah">Pettah</option>
-                                <option value="Jaffna">Jaffna</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <input type="text" id="from-location" placeholder="Type to search...">
+                            <div id="from-autocomplete" class="autocomplete-list"></div>
                         </div>
 
                         <div class="direction-arrow">
                             <i class="fa-solid fa-arrow-right"></i>
                         </div>
 
-                        <div class="select-container">
+                        <div class="autocomplete-container">
                             <label for="to-location">To:</label>
-                            <select id="to-location">
-                                <option value="Pettah">Pettah</option>
-                                <option value="Colombo">Colombo</option>
-                                <option value="Jaffna">Jaffna</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <input type="text" id="to-location" placeholder="Type to search...">
+                            <div id="to-autocomplete" class="autocomplete-list"></div>
                         </div>
                     </div>
 
                     <div class="date-picker">
                         <label for="travel-date">Date:</label>
                         <input type="date" id="travel-date" name="travel-date">
+                    </div>
+
+                    <div class="time-picker">
+                        <label for="travel-time">Time:</label>
+                        <input type="time" id="travel-time" name="travel-time" value="17:00">
                     </div>
 
                     <div class="transport-options">
@@ -98,10 +95,10 @@
                         <div class="bus-class">
                             <span>Choose Class:</span>
                             <div class="class-options">
-                                <button class="class-option" data-class="N">N</button>
-                                <button class="class-option" data-class="S">S</button>
-                                <button class="class-option" data-class="L">L</button>
-                                <button class="class-option" data-class="XL">XL</button>
+                                <button class="class-option" data-class="Normal">N</button>
+                                <button class="class-option" data-class="Semi-Luxury">S</button>
+                                <button class="class-option" data-class="Luxury">L</button>
+                                <button class="class-option" data-class="Super Luxury">XL</button>
                             </div>
                         </div>
                     </div>
