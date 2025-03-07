@@ -1,15 +1,14 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bus Booking System</title>
+    <title>Bus Booking Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
@@ -37,14 +36,19 @@
         <!-- Main Content -->
         <div class="main-content">
             <!-- Header -->
-            <header>
-                <div class="notification">
-                    <i class="fa-solid fa-bell"></i>
+            <header class="dashboard-header">
+                <div class="header-title">
+                    <h1>Bus Booking Dashboard</h1>
                 </div>
-                <div class="user-profile">
-                    <span class="user-name">Admin Name</span>
-                    <span class="language">En</span>
-                    <img src="images/slpng.jpeg" alt="Flag" class="flag">
+                <div class="header-actions">
+                    <div class="notification">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <span class="user-name">Admin Name</span>
+                        <span class="language">En</span>
+                        <img src="images/slpng.jpeg" alt="Flag" class="flag">
+                    </div>
                 </div>
             </header>
 
@@ -74,14 +78,16 @@
                         </div>
                     </div>
 
-                    <div class="date-picker">
-                        <label for="travel-date">Date:</label>
-                        <input type="date" id="travel-date" name="travel-date">
-                    </div>
+                    <div class="date-time-selectors">
+                        <div class="date-picker">
+                            <label for="travel-date">Date:</label>
+                            <input type="date" id="travel-date" name="travel-date">
+                        </div>
 
-                    <div class="time-picker">
-                        <label for="travel-time">Time:</label>
-                        <input type="time" id="travel-time" name="travel-time" value="">
+                        <div class="time-picker">
+                            <label for="travel-time">Time:</label>
+                            <input type="time" id="travel-time" name="travel-time" value="">
+                        </div>
                     </div>
 
                     <div class="transport-options">
@@ -90,7 +96,7 @@
                                 <i class="fa-solid fa-bus"></i>
                                 <span></span>
                             </div>
-                            <div class="mode-option " data-mode="train">
+                            <div class="mode-option" data-mode="train">
                                 <i class="fa-solid fa-train"></i>
                                 <span></span>
                             </div>
@@ -111,7 +117,7 @@
                 </div>
 
                 <!-- Search Results -->
-                <div id="search-results" class="search-results">
+                <div id="search-results" class="search-results dashboard-results">
                     <!-- Will be populated by JavaScript -->
                 </div>
             </div>
@@ -121,6 +127,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-

@@ -8,6 +8,7 @@
 
 :root {
     --primary-color: #FF5722;
+    --secondary-color: #333333;
     --background-color: #f5f5f5;
     --white: #ffffff;
     --light-gray: #e0e0e0;
@@ -18,26 +19,36 @@
     --red-timeline: #F44336;
     --whatsapp-green: #25D366;
     --button-orange: #FF5722;
+    --sidebar-bg: #2c3e50;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
     background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-.container {
+.dashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Sidebar Styles */
 .sidebar {
     width: 80px;
-    background-color: var(--white);
+    background-color: var(--sidebar-bg);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
+    transition: width 0.3s;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar:hover {
+    width: 200px;
 }
 
 .logo {
@@ -54,6 +65,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .nav-item {
@@ -64,38 +76,54 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    color: var(--secondary-text);
+    color: var(--white);
     font-size: 20px;
+    transition: background-color 0.3s;
 }
 
 .nav-item.active {
     background-color: var(--primary-color);
-    color: var(--white);
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Main Content Styles */
 .main-content {
     flex: 1;
     padding: 20px;
+    background-color: var(--background-color);
 }
 
 /* Header Styles */
-header {
+.dashboard-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
+    padding: 15px 20px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--light-gray);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.header-title h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .notification {
-    margin-right: 20px;
-    position: relative;
     cursor: pointer;
-}
-
-.notification i {
+    color: var(--secondary-text);
     font-size: 18px;
-    color: var(--text-color);
 }
 
 .user-profile {
@@ -106,6 +134,7 @@ header {
 
 .user-name {
     font-weight: 500;
+    color: var(--secondary-color);
 }
 
 .language {
@@ -124,7 +153,8 @@ header {
     background-color: var(--white);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
 }
 
 .search-header h1 {
@@ -140,23 +170,26 @@ header {
 }
 
 .search-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; /* Increased gap to prevent overlap */
     align-items: flex-end;
     margin-bottom: 20px;
     padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
 }
 
 .location-selectors {
     display: flex;
     align-items: center;
     gap: 15px;
+    grid-column: span 2; /* Span two columns for better alignment */
 }
 
 .autocomplete-container {
     position: relative;
-    width: 180px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -173,7 +206,13 @@ header {
     border: 1px solid var(--light-gray);
     border-radius: 5px;
     font-size: 16px;
-    background-color: var(--background-color);
+    background-color: var(--white);
+    transition: border-color 0.3s;
+}
+
+.autocomplete-container input:focus {
+    border-color: var(--primary-color);
+    outline: none;
 }
 
 .autocomplete-list {
@@ -188,6 +227,7 @@ header {
     overflow-y: auto;
     z-index: 10;
     display: none;
+    box-shadow: var(--shadow);
 }
 
 .autocomplete-list div {
@@ -209,12 +249,20 @@ header {
     justify-content: center;
     align-items: center;
     color: var(--white);
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.date-time-selectors {
+    display: flex;
+    gap: 15px;
+    grid-column: span 2; /* Span two columns */
 }
 
 .date-picker, .time-picker {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
 }
 
 .date-picker label, .time-picker label {
@@ -227,12 +275,14 @@ header {
     border: 1px solid var(--light-gray);
     border-radius: 5px;
     font-size: 14px;
+    background-color: var(--white);
 }
 
 .transport-options {
     display: flex;
     gap: 20px;
-    align-items: center;
+    align-items: right;
+    grid-column: span 2; /* Span two columns */
 }
 
 .mode-static {
@@ -251,20 +301,11 @@ header {
     gap: 5px;
     margin-right: 10px;
     margin-left: 10px;
-    
 }
 
 .mode-option.active {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: default;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-right: 10px;
-    margin-left: 10px;
 }
 
 .mode-option i {
@@ -298,6 +339,7 @@ header {
     color: var(--white);
     font-weight: bold;
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .class-option.selected {
@@ -330,21 +372,45 @@ header {
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 40%; /* Ensure it takes full width in grid */
+    grid-column: span 2; /* Span two columns to avoid overlap */
+}
+
+.search-button:hover {
+    background-color: #e64a19; /* Darker shade of orange */
 }
 
 /* Search Results Styles */
-.search-results {
+.dashboard-results {
     display: none;
-    margin-top: 30px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* Added gap between cards */
+    padding: 15px; /* Added padding to container */
 }
 
 .bus-item {
     display: flex;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    background-color: var(--card-bg);
     overflow: hidden;
-    background-color: var(--white);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 0; /* Reset any inherited margin */
+}
+
+.bus-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bus-item .main-content {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
 }
 
 .bus-details {
@@ -357,6 +423,7 @@ header {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 5px;
+    color: var(--secondary-color);
 }
 
 .bus-type {
@@ -402,6 +469,7 @@ header {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 5px;
+    color: var(--secondary-color);
 }
 
 .date {
@@ -412,6 +480,7 @@ header {
 
 .location {
     font-size: 14px;
+    color: var(--text-color);
 }
 
 .journey-route {
@@ -521,6 +590,7 @@ header {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 5px;
+    color: var(--secondary-color);
 }
 
 .additional-info {
@@ -552,32 +622,23 @@ header {
     align-items: center;
     gap: 5px;
     width: 100%;
+    transition: background-color 0.3s;
 }
 
 .send-info {
     background-color: var(--whatsapp-green);
 }
 
+.send-info:hover {
+    background-color: #1da851; /* Darker shade of green */
+}
+
 .book-now {
     background-color: var(--button-orange);
 }
 
-/* Update existing styles in style.css */
-
-/* Bus Item */
-.bus-item {
-    display: flex;
-    flex-direction: column; /* Changed to column to stack main content and additional info vertically */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    background-color: var(--white);
-}
-
-/* Main content row (bus-details, bus-image, etc.) */
-.bus-item .main-content {
-    display: flex;
-    flex-direction: row; /* Keep the main content in a row */
+.book-now:hover {
+    background-color: #e64a19; /* Darker shade of orange */
 }
 
 /* Additional Info Panel */
@@ -587,12 +648,12 @@ header {
     transition: max-height 0.5s ease-in-out;
     background-color: #f9f9f9;
     border-top: 1px solid var(--light-gray);
-    width: 100%; /* Ensure it spans the full width */
+    width: 100%;
     padding: 0 15px;
 }
 
 .additional-info-panel.active {
-    max-height: 600px; /* Increased to accommodate 12 rows */
+    max-height: 600px;
     overflow-y: auto;
 }
 
@@ -629,15 +690,15 @@ header {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: var(--text-color);
+    color: var(--secondary-color);
 }
 
 .boardings-list {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
-    grid-template-rows: repeat(12, auto); /* 12 rows */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(12, auto);
     gap: 5px;
-    max-height: 500px; /* Adjusted for 12 rows */
+    max-height: 500px;
     overflow-y: auto;
 }
 
@@ -645,33 +706,33 @@ header {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 12px; /* Reduced font size for compactness */
+    font-size: 12px;
     color: var(--text-color);
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
 }
 
 .boarding-dot {
     width: 8px;
-    height: 8px; /* Reduced size for compactness */
+    height: 8px;
     border-radius: 50%;
 }
 
 .boarding-dot.departure {
-    background-color: #4CAF50; /* Green for departure */
+    background-color: #4CAF50;
 }
 
 .boarding-dot.arrival {
-    background-color: #F44336; /* Red for arrival */
+    background-color: #F44336;
 }
 
 .boarding-dot.intermediate {
-    background-color: #FFC107; /* Yellow for intermediate */
+    background-color: #FFC107;
 }
 
 .boarding-item .stop-name {
     flex: 1;
     overflow: hidden;
-    text-overflow: ellipsis; /* Handle long names */
+    text-overflow: ellipsis;
 }
 
 .boarding-item .stop-time {
@@ -683,4 +744,37 @@ header {
 /* Rotate the chevron icon when panel is active */
 .additional-info.active .fa-chevron-down {
     transform: rotate(180deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+
+    .location-selectors {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .direction-arrow {
+        display: none;
+    }
+
+    .date-time-selectors {
+        flex-direction: column;
+    }
+
+    .transport-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-results {
+        grid-template-columns: 1fr;
+    }
+
+    .search-button {
+        grid-column: span 1; /* Reset to single column on mobile */
+    }
 }
