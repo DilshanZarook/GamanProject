@@ -200,8 +200,9 @@ header {
 }
 
 .direction-arrow {
-    width: 40px;
-    height: 40px;
+    margin-top: 20px;
+    width: 30px;
+    height: 30px;
     background-color: var(--primary-color);
     border-radius: 50%;
     display: flex;
