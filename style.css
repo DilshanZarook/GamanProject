@@ -240,6 +240,20 @@ header {
     align-items: center;
 }
 
+.mode-option {
+    background-color: var(--light-gray);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+    
+}
+
 .mode-option.active {
     background-color: var(--primary-color);
     color: var(--white);
@@ -249,6 +263,8 @@ header {
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .mode-option i {
@@ -544,4 +560,127 @@ header {
 
 .book-now {
     background-color: var(--button-orange);
+}
+
+/* Update existing styles in style.css */
+
+/* Bus Item */
+.bus-item {
+    display: flex;
+    flex-direction: column; /* Changed to column to stack main content and additional info vertically */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    background-color: var(--white);
+}
+
+/* Main content row (bus-details, bus-image, etc.) */
+.bus-item .main-content {
+    display: flex;
+    flex-direction: row; /* Keep the main content in a row */
+}
+
+/* Additional Info Panel */
+.additional-info-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    background-color: #f9f9f9;
+    border-top: 1px solid var(--light-gray);
+    width: 100%; /* Ensure it spans the full width */
+    padding: 0 15px;
+}
+
+.additional-info-panel.active {
+    max-height: 600px; /* Increased to accommodate 12 rows */
+    overflow-y: auto;
+}
+
+.additional-info-content {
+    padding: 15px 0;
+}
+
+/* General Information Section */
+.general-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.info-item {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.info-item span {
+    font-weight: 500;
+    color: var(--secondary-text);
+}
+
+/* Boardings Section */
+.boardings {
+    padding-top: 15px;
+}
+
+.boardings h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.boardings-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(12, auto); /* 12 rows */
+    gap: 5px;
+    max-height: 500px; /* Adjusted for 12 rows */
+    overflow-y: auto;
+}
+
+.boarding-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px; /* Reduced font size for compactness */
+    color: var(--text-color);
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.boarding-dot {
+    width: 8px;
+    height: 8px; /* Reduced size for compactness */
+    border-radius: 50%;
+}
+
+.boarding-dot.departure {
+    background-color: #4CAF50; /* Green for departure */
+}
+
+.boarding-dot.arrival {
+    background-color: #F44336; /* Red for arrival */
+}
+
+.boarding-dot.intermediate {
+    background-color: #FFC107; /* Yellow for intermediate */
+}
+
+.boarding-item .stop-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Handle long names */
+}
+
+.boarding-item .stop-time {
+    font-weight: 500;
+    color: var(--secondary-text);
+    white-space: nowrap;
+}
+
+/* Rotate the chevron icon when panel is active */
+.additional-info.active .fa-chevron-down {
+    transform: rotate(180deg);
 }

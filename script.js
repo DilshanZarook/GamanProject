@@ -1,6 +1,5 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample locations (expandable to 60+ stops when provided)
+    // Sample locations (as provided)
     const locations = [
         'Colombo', 'Maligawatta', 'Kelani thissa', '4th Canal / Biyagama Road', 'Thorana Junction', 
         'Kelaniya University', 'Kiribathgoda', 'Maharagama Junction', 'Kadawatha', 'Gonahena Junction', 
@@ -14,17 +13,112 @@ document.addEventListener('DOMContentLoaded', function() {
         'Ambilipitiya (Yatinuchara Sabha)', 'Kiribathkumbura', 'Peradeniya(පේරාදොණිය)', 'Gatembe(ගැටඹේ)', 
         'Mulgampola(මුල්ගම්පොල)', 'Kandy(මහනුවර)'
     ];
-    
 
-    // Sample bus data with 60 stops and fares between Colombo and Kandy (Translated)
+    // Sample bus data with 60 stops (as provided)
     const buses = [
+        {
+            company: 'Bigidy Travels',
+            class: 'Normal',
+            service: 'NTC',
+            amenities: 'Non-A/C',
+            image: 'images/Rathna(XL).png',
+            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
+            departure: { time: '05:00 PM', date: '07 Mar 2025', location: 'Colombo' },
+            arrival: { time: '06:00 PM', date: '07 Mar 2025', location: 'Kandy' },
+            stops: [
+                { name: 'Colombo', time: '05:00 PM' },
+                { name: 'Maligawatta', time: '05:05 PM' },
+                { name: 'Kelani thissa', time: '05:10 PM' },
+                { name: '4th Canal / Biyagama Road', time: '05:15 PM' },
+                { name: 'Thorana Junction', time: '05:20 PM' },
+                { name: 'Kelaniya University', time: '05:25 PM' },
+                { name: 'Kiribathgoda', time: '05:30 PM' },
+                { name: 'Maharagama Junction', time: '05:35 PM' },
+                { name: 'Kadawatha', time: '05:40 PM' },
+                { name: 'Gonahena Junction', time: '05:45 PM' },
+                { name: 'Indigama Junction', time: '05:50 PM' },
+                { name: 'Kirillawala', time: '05:55 PM' },
+                { name: 'Trackmo Junction', time: '06:00 PM' },
+                { name: 'Mudungoda', time: '06:05 PM' },
+                { name: 'Miriswatta', time: '06:10 PM' },
+                { name: 'Yakkala', time: '06:15 PM' },
+                { name: 'Aluthgama', time: '06:20 PM' },
+                { name: 'Kalagedihena', time: '06:25 PM' },
+                { name: 'Thihariya', time: '06:30 PM' },
+                { name: 'Nittambuwa Sanghabodhi Maha Vidyalaya', time: '06:35 PM' },
+                { name: 'Nittambuwa', time: '06:40 PM' },
+                { name: 'Kalalpitiya', time: '06:45 PM' },
+                { name: 'Paswala', time: '06:50 PM' },
+                { name: 'Kaju Gama', time: '06:55 PM' },
+                { name: 'Radhawadunna', time: '07:00 PM' },
+                { name: 'Wewel Deniya', time: '07:05 PM' },
+                { name: 'Dummaladoniya', time: '07:10 PM' },
+                { name: 'Warakapola', time: '07:15 PM' },
+                { name: 'Ambepussa', time: '07:20 PM' },
+                { name: 'Mahena', time: '07:25 PM' },
+                { name: 'Tholangamuwa', time: '07:30 PM' },
+                { name: 'Gasnaawa Waththa Junction', time: '07:35 PM' },
+                { name: 'Nelumdoniya', time: '07:40 PM' },
+                { name: 'Batapothalla KandaUda', time: '07:45 PM' },
+                { name: 'Siyambalapitiya', time: '07:50 PM' },
+                { name: 'Balla-pana Junction', time: '07:55 PM' },
+                { name: 'Galigamuwa', time: '08:00 PM' },
+                { name: 'Ambanpitiya', time: '08:05 PM' },
+                { name: 'Rangwala Junction', time: '08:10 PM' },
+                { name: 'Kegalle', time: '08:15 PM' },
+                { name: 'Meepitiya', time: '08:20 PM' },
+                { name: 'Karangupona', time: '08:25 PM' },
+                { name: 'Mologoda', time: '08:30 PM' },
+                { name: 'Mangalgama', time: '08:35 PM' },
+                { name: 'Uthuwankanda', time: '08:40 PM' },
+                { name: 'Anwarama', time: '08:45 PM' },
+                { name: 'Mawanella', time: '08:50 PM' },
+                { name: 'Beligammana', time: '08:55 PM' },
+                { name: 'Hubula', time: '09:00 PM' },
+                { name: 'Gafanethenna', time: '09:05 PM' },
+                { name: 'Pahala Kadugannawa', time: '09:10 PM' },
+                { name: 'Kadugannawa', time: '09:15 PM' },
+                { name: 'Henachavachala (Rehela Road)', time: '09:20 PM' },
+                { name: 'Pilimathalawa', time: '09:25 PM' },
+                { name: 'Ambilipitiya (Yatinuchara Sabha)', time: '09:30 PM' },
+                { name: 'Kiribathkumbura', time: '09:35 PM' },
+                { name: 'Peradeniya(පේරාදොණිය)', time: '09:40 PM' },
+                { name: 'Gatembe(ගැටඹේ)', time: '09:45 PM' },
+                { name: 'Mulgampola(මුල්ගම්පොල)', time: '09:50 PM' },
+                { name: 'Kandy(මහනුවර)', time: '09:55 PM' }
+            ],
+            coffeeBreak: '06:10 PM',
+            fare: {
+                'Colombo-Kandy(මහනුවර)': '350.00 LKR',
+                'Colombo-Kalutara': '50.00 LKR',
+                'Kalutara-Maharagama': '20.00 LKR',
+                'Maharagama-Kadugannawa': '30.00 LKR',
+                'Kadugannawa-Kandy': '100.00 LKR',
+                'Colombo-Maligawatta': '10.00 LKR',
+                'Maligawatta-Kelaniya': '15.00 LKR',
+                'Kelaniya-Kiribathgoda': '20.00 LKR',
+                'Kiribathgoda-Maharagama': '15.00 LKR',
+                'Maharagama-Kadugannawa': '25.00 LKR',
+                'Kadugannawa-Gehena': '15.00 LKR',
+                'Gehena-Idigahamuwa': '20.00 LKR',
+                'Idigahamuwa-Kandy': '50.00 LKR',
+            },
+            additionalInfo: {
+                typeOfSeat: 'Adjustable',
+                route: 'ExpressWay',
+                noOfSeats: 51,
+                availability: 17,
+                routeNumber: '15/87',
+                rating: 4.5
+            }
+        },
         {
             company: 'RATHNA Travel',
             class: 'Normal',
             service: 'NTC',
             amenities: 'Non-A/C',
             image: 'images/CTB.png',
-            route: { direction: 'forward', start: 'Colombo', end: 'Kandy' },
+            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
             departure: { time: '05:00 PM', date: '07 Mar 2025', location: 'Colombo' },
             arrival: { time: '06:00 PM', date: '07 Mar 2025', location: 'Kandy' },
             stops: [
@@ -96,30 +190,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Kalutara-Maharagama': '20.00 LKR',
                 'Maharagama-Kadugannawa': '30.00 LKR',
                 'Kadugannawa-Kandy': '100.00 LKR',
-                // Fare for all segments between stops (example)
                 'Colombo-Maligawatta': '10.00 LKR',
                 'Maligawatta-Kelaniya': '15.00 LKR',
                 'Kelaniya-Kiribathgoda': '20.00 LKR',
                 'Kiribathgoda-Maharagama': '15.00 LKR',
                 'Maharagama-Kadugannawa': '25.00 LKR',
-                // Add fares for all other segments
                 'Kadugannawa-Gehena': '15.00 LKR',
                 'Gehena-Idigahamuwa': '20.00 LKR',
                 'Idigahamuwa-Kandy': '50.00 LKR',
-                // Continue fare data...
+            },
+            additionalInfo: {
+                typeOfSeat: 'Adjustable',
+                route: 'ExpressWay',
+                noOfSeats: 51,
+                availability: 17,
+                routeNumber: '15/87',
+                rating: 4.5
             }
-        }, 
+        },
         {
-            company: 'Bigidy Travel',
+            company: 'DILSHAN Travel',
             class: 'Semi-Luxury',
             service: 'NTC',
             amenities: 'Non-A/C',
-            image: 'images/Rathna(XL).png',
-            route: { direction: 'forward', start: 'Colombo', end: 'Kandy' },
-            departure: { time: '05:00 PM', date: '07 Mar 2025', location: 'Colombo' },
-            arrival: { time: '06:00 PM', date: '07 Mar 2025', location: 'Kandy' },
+            image: 'images/CTB.png',
+            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
+            departure: { time: '07:00 PM', date: '07 Mar 2025', location: 'Colombo' },
+            arrival: { time: '08:00 PM', date: '07 Mar 2025', location: 'Kandy' },
             stops: [
-                { name: 'Colombo', time: '05:00 PM' },
+                { name: 'Colombo', time: '07:00 PM' },
                 { name: 'Maligawatta', time: '05:05 PM' },
                 { name: 'Kelani thissa', time: '05:10 PM' },
                 { name: '4th Canal / Biyagama Road', time: '05:15 PM' },
@@ -178,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Peradeniya(පේරාදොණිය)', time: '09:40 PM' },
                 { name: 'Gatembe(ගැටඹේ)', time: '09:45 PM' },
                 { name: 'Mulgampola(මුල්ගම්පොල)', time: '09:50 PM' },
-                { name: 'Kandy(මහනුවර)', time: '09:55 PM' }
+                { name: 'Kandy(මහනුවර)', time: '11:55 PM' }
             ],
             coffeeBreak: '06:10 PM',
             fare: {
@@ -187,21 +286,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Kalutara-Maharagama': '20.00 LKR',
                 'Maharagama-Kadugannawa': '30.00 LKR',
                 'Kadugannawa-Kandy': '100.00 LKR',
-                // Fare for all segments between stops (example)
                 'Colombo-Maligawatta': '10.00 LKR',
                 'Maligawatta-Kelaniya': '15.00 LKR',
                 'Kelaniya-Kiribathgoda': '20.00 LKR',
                 'Kiribathgoda-Maharagama': '15.00 LKR',
                 'Maharagama-Kadugannawa': '25.00 LKR',
-                // Add fares for all other segments
                 'Kadugannawa-Gehena': '15.00 LKR',
                 'Gehena-Idigahamuwa': '20.00 LKR',
                 'Idigahamuwa-Kandy': '50.00 LKR',
-                // Continue fare data...
+            },
+            additionalInfo: {
+                typeOfSeat: 'Adjustable',
+                route: 'ExpressWay',
+                noOfSeats: 51,
+                availability: 17,
+                routeNumber: '15/87',
+                rating: 4.5
             }
         }
     ];
-
 
     // DOM Elements
     const fromLocation = document.getElementById('from-location');
@@ -210,22 +313,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const toAutocomplete = document.getElementById('to-autocomplete');
     const travelDate = document.getElementById('travel-date');
     const travelTime = document.getElementById('travel-time');
-    const searchButton = document.getElementById('search-button');
     const searchResults = document.getElementById('search-results');
     const classOptions = document.querySelectorAll('.class-option');
+    const modeOptions = document.querySelectorAll('.mode-option');
 
     // Set today's date as default
     const today = new Date().toISOString().split('T')[0];
     travelDate.value = today;
 
-    // Class selection
+    // Class and Mode selection
     let selectedClass = null;
+    let selectedMode = 'bus'; // Default to 'bus' since it's active by default
+
     classOptions.forEach(option => {
         option.addEventListener('click', function() {
             classOptions.forEach(opt => opt.classList.remove('selected'));
             this.classList.add('selected');
             selectedClass = this.getAttribute('data-class');
             console.log('Selected Class:', selectedClass);
+            performSearch(); // Trigger search on class selection
+        });
+    });
+
+    modeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            modeOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            selectedMode = this.getAttribute('data-mode');
+            console.log('Selected Mode:', selectedMode);
+            performSearch(); // Trigger search on mode selection
         });
     });
 
@@ -242,16 +358,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     div.addEventListener('click', function() {
                         input.value = suggestion;
                         autocompleteList.style.display = 'none';
+                        performSearch(); // Trigger search on location selection
                     });
                     autocompleteList.appendChild(div);
                 });
                 autocompleteList.style.display = suggestions.length > 0 ? 'block' : 'none';
             } else {
                 autocompleteList.style.display = 'none';
+                performSearch(); // Trigger search when input is cleared
             }
         });
 
-        // Hide autocomplete when clicking outside
         document.addEventListener('click', function(e) {
             if (!input.contains(e.target) && !autocompleteList.contains(e.target)) {
                 autocompleteList.style.display = 'none';
@@ -263,16 +380,24 @@ document.addEventListener('DOMContentLoaded', function() {
     showAutocomplete(fromLocation, fromAutocomplete, locations);
     showAutocomplete(toLocation, toAutocomplete, locations);
 
-    // Search function
-    searchButton.addEventListener('click', function() {
-        const from = fromLocation.value;
-        const to = toLocation.value;
+    // Automatic Search Function
+    function performSearch() {
+        const from = fromLocation.value.trim();
+        const to = toLocation.value.trim();
         const date = travelDate.value;
         const time = travelTime.value;
 
-        console.log('Search Inputs:', { from, to, date, time, selectedClass });
+        console.log('Search Inputs:', { from, to, date, time, selectedClass, selectedMode });
 
         searchResults.innerHTML = '';
+        searchResults.style.display = 'none';
+
+        // Only proceed if all main fields (From, To, Date) are filled
+        if (!from || !to || !date) {
+            searchResults.innerHTML = '<p>Please fill in all required fields (From, To, Date).</p>';
+            searchResults.style.display = 'block';
+            return;
+        }
 
         const formattedDate = formatDate(date);
         const searchTime = convertTo24Hour(time);
@@ -281,6 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let dateFailed = true;
         let timeFailed = true;
         let classFailed = selectedClass ? true : false;
+        let modeFailed = true;
 
         const filteredBuses = buses.map(bus => {
             const stopNames = bus.stops.map(stop => stop.name);
@@ -289,7 +415,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const matchesLocation = fromIndex !== -1 && toIndex !== -1 && fromIndex < toIndex;
             const matchesDate = bus.departure.date === formattedDate;
-            const matchesClass = selectedClass ? bus.class === selectedClass : true;
+            const matchesClass = !selectedClass || (selectedClass && bus.class === selectedClass);
+            const matchesMode = bus.route.direction === selectedMode; // Compare with selectedMode
             const busDepartureTime = convertTo24Hour(bus.departure.time);
             const matchesTime = compareTimes(searchTime, busDepartureTime) <= 0;
 
@@ -297,19 +424,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (matchesDate) dateFailed = false;
             if (matchesTime) timeFailed = false;
             if (matchesClass) classFailed = false;
+            if (matchesMode) modeFailed = false;
 
             console.log('Bus:', bus.company, {
                 matchesLocation,
                 matchesDate,
                 matchesTime,
                 matchesClass,
+                matchesMode,
                 fromIndex,
                 toIndex,
                 busDepartureTime,
                 searchTime
             });
 
-            if (matchesLocation && matchesDate && matchesTime && matchesClass) {
+            if (matchesLocation && matchesDate && matchesTime && matchesClass && matchesMode) {
                 const relevantStops = bus.stops.slice(fromIndex, toIndex + 1);
                 const fareKey = `${from}-${to}`;
                 return {
@@ -321,6 +450,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     departure: { time: relevantStops[0].time, date: bus.departure.date, location: from },
                     arrival: { time: relevantStops[relevantStops.length - 1].time, date: bus.arrival.date, location: to },
                     stops: relevantStops,
+                    allStops: bus.stops,
+                    additionalInfo: bus.additionalInfo,
                     coffeeBreak: bus.coffeeBreak,
                     fare: bus.fare[fareKey] || 'Fare not available'
                 };
@@ -329,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).filter(bus => bus !== null);
 
         console.log('Filtered Buses:', filteredBuses);
-        console.log('Failure Flags:', { locationFailed, dateFailed, timeFailed, classFailed });
+        console.log('Failure Flags:', { locationFailed, dateFailed, timeFailed, classFailed, modeFailed });
 
         if (filteredBuses.length > 0) {
             filteredBuses.forEach(bus => {
@@ -345,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (dateFailed) failureReasons.push('for the selected date');
             if (timeFailed) failureReasons.push('at the selected time');
             if (classFailed && selectedClass) failureReasons.push('for the selected class');
+            if (modeFailed) failureReasons.push('for the selected mode');
 
             if (failureReasons.length === 0) {
                 errorMessage = 'No buses found matching your criteria.';
@@ -353,12 +485,24 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (failureReasons.length === 2) {
                 errorMessage = `${errorMessage} ${failureReasons[0]} and ${failureReasons[1]}.`;
             } else {
-                errorMessage = 'No buses for selected city, date, time, and class.';
+                errorMessage = 'No buses for selected city, date, time, class, and mode.';
             }
 
             searchResults.innerHTML = `<p>${errorMessage}</p>`;
             searchResults.style.display = 'block';
         }
+    }
+
+    // Add event listeners for automatic search on input change
+    [fromLocation, toLocation, travelDate, travelTime].forEach(input => {
+        input.addEventListener('input', () => {
+            console.log(`Input changed: ${input.id} = ${input.value}`);
+            performSearch();
+        });
+        input.addEventListener('change', () => {
+            console.log(`Change event: ${input.id} = ${input.value}`);
+            performSearch();
+        });
     });
 
     // Helper functions
@@ -371,6 +515,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function convertTo24Hour(timeStr) {
+        // Handle cases where time might not include AM/PM (e.g., from input type="time")
+        if (!timeStr.includes(' ')) {
+            const [hours, minutes] = timeStr.split(':');
+            return `${hours}:${minutes}:00`;
+        }
         const [time, modifier] = timeStr.split(' ');
         let [hours, minutes] = time.split(':');
         hours = parseInt(hours, 10);
@@ -391,70 +540,118 @@ document.addEventListener('DOMContentLoaded', function() {
         busItem.className = 'bus-item';
         
         busItem.innerHTML = `
-            <div class="bus-details">
-                <div class="bus-company">${bus.company}</div>
-                <div class="bus-type">${bus.class}</div>
-                <div class="bus-service">${bus.service}</div>
-                <div class="bus-amenities">${bus.amenities}</div>
-            </div>
-            
-            <div class="bus-image">
-                <img src="${bus.image}" alt="Bus Image">
-            </div>
-            
-            <div class="departure-info">
-                <div class="time">${bus.departure.time}</div>
-                <div class="date">${bus.departure.date}</div>
-                <div class="location">${bus.departure.location}</div>
-            </div>
-            
-            <div class="journey-route">
-                <div class="route-line">
-                    ${bus.stops.map((_, index) => `
-                        <div class="stop-point ${index === 0 ? 'start-point' : index === bus.stops.length - 1 ? 'end-point' : 'middle-point'}"></div>
+            <div class="main-content">
+                <div class="bus-details">
+                    <div class="bus-company">${bus.company}</div>
+                    <div class="bus-type">${bus.class}</div>
+                    <div class="bus-service">${bus.service}</div>
+                    <div class="bus-amenities">${bus.amenities}</div>
+                </div>
+                
+                <div class="bus-image">
+                    <img src="${bus.image}" alt="Bus Image">
+                </div>
+                
+                <div class="departure-info">
+                    <div class="time">${bus.departure.time}</div>
+                    <div class="date">${bus.departure.date}</div>
+                    <div class="location">${bus.departure.location}</div>
+                </div>
+                
+                <div class="journey-route">
+                    <div class="route-line">
+                        ${bus.stops.map((_, index) => `
+                            <div class="stop-point ${index === 0 ? 'start-point' : index === bus.stops.length - 1 ? 'end-point' : 'middle-point'}"></div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="coffee-break">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <div class="coffee-time">${bus.coffeeBreak}</div>
+                    </div>
+                    
+                    ${bus.stops.map((stop, index) => `
+                        <div class="stop-label ${index === 0 ? 'start-label' : index === bus.stops.length - 1 ? 'end-label' : 'middle-label'}">
+                            <div class="stop-name">${stop.name}</div>
+                            <div class="stop-time">${stop.time}</div>
+                        </div>
                     `).join('')}
                 </div>
                 
-                <div class="coffee-break">
-                    <i class="fa-solid fa-mug-hot"></i>
-                    <div class="coffee-time">${bus.coffeeBreak}</div>
+                <div class="arrival-info">
+                    <div class="time">${bus.arrival.time}</div>
+                    <div class="date">${bus.arrival.date}</div>
+                    <div class="location">${bus.arrival.location}</div>
                 </div>
                 
-                ${bus.stops.map((stop, index) => `
-                    <div class="stop-label ${index === 0 ? 'start-label' : index === bus.stops.length - 1 ? 'end-label' : 'middle-label'}">
-                        <div class="stop-name">${stop.name}</div>
-                        <div class="stop-time">${stop.time}</div>
+                <div class="price-details">
+                    <div class="price">${bus.fare}</div>
+                    <div class="additional-info">
+                        <span>Additional Info</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                `).join('')}
-            </div>
-            
-            <div class="arrival-info">
-                <div class="time">${bus.arrival.time}</div>
-                <div class="date">${bus.arrival.date}</div>
-                <div class="location">${bus.arrival.location}</div>
-            </div>
-            
-            <div class="price-details">
-                <div class="price">${bus.fare}</div>
-                <div class="additional-info">
-                    <span>Additional Info</span>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <div class="action-buttons">
+                        <button class="send-info">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Send Info
+                        </button>
+                        <button class="book-now">
+                            <i class="fa-solid fa-ticket"></i>
+                            Book Now
+                        </button>
+                    </div>
                 </div>
-                <div class="action-buttons">
-                    <button class="send-info">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        Send Info
-                    </button>
-                    <button class="book-now">
-                        <i class="fa-solid fa-ticket"></i>
-                        Book Now
-                    </button>
+            </div>
+            
+            <div class="additional-info-panel">
+                <div class="additional-info-content">
+                    <!-- General Information -->
+                    <div class="general-info">
+                        <div class="info-item">Type of Seat: <span>${bus.additionalInfo.typeOfSeat}</span></div>
+                        <div class="info-item">Route: <span>${bus.additionalInfo.route}</span></div>
+                        <div class="info-item">No of Seats: <span>${bus.additionalInfo.noOfSeats}</span></div>
+                        <div class="info-item">Availability: <span>${bus.additionalInfo.availability}</span></div>
+                        <div class="info-item">Route Number: <span>${bus.additionalInfo.routeNumber}</span></div>
+                    </div>
+                    
+                    <!-- Boardings -->
+                    <div class="boardings">
+                        <h4>Boardings</h4>
+                        <div class="boardings-list">
+                            ${bus.allStops.map((stop, index) => {
+                                const row = Math.floor(index / 5);
+                                const col = index % 5;
+                                return `
+                                    <div class="boarding-item" style="grid-row: ${row + 1}; grid-column: ${col + 1};">
+                                        <div class="boarding-dot ${
+                                            index === 0 ? 'departure' : 
+                                            index === bus.allStops.length - 1 ? 'arrival' : 
+                                            'intermediate'
+                                        }"></div>
+                                        <span class="stop-name">${stop.name}</span>
+                                        <span class="stop-time">${stop.time}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
         
         const additionalInfoBtn = busItem.querySelector('.additional-info');
-        additionalInfoBtn.addEventListener('click', () => alert('Additional info would show here'));
+        const additionalInfoPanel = busItem.querySelector('.additional-info-panel');
+
+        additionalInfoBtn.addEventListener('click', () => {
+            additionalInfoPanel.classList.toggle('active');
+            additionalInfoBtn.classList.toggle('active');
+
+            if (additionalInfoPanel.classList.contains('active')) {
+                additionalInfoPanel.style.maxHeight = `${additionalInfoPanel.scrollHeight}px`;
+            } else {
+                additionalInfoPanel.style.maxHeight = '0';
+            }
+        });
 
         const sendInfoBtn = busItem.querySelector('.send-info');
         sendInfoBtn.addEventListener('click', () => alert('Info would be sent via WhatsApp'));
@@ -464,4 +661,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return busItem;
     }
+
+    // Initial search to handle default values
+    performSearch();
 });
