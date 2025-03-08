@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Siyambalapitiya', 'Balla-pana Junction', 'Galigamuwa', 'Ambanpitiya', 'Rangwala Junction', 'Kegalle', 
         'Meepitiya', 'Karangupona', 'Mologoda', 'Mangalgama', 'Uthuwankanda', 'Anwarama', 'Mawanella', 'Beligammana', 
         'Hubula', 'Gafanethenna', 'Pahala Kadugannawa', 'Kadugannawa', 'Henachavachala (Rehela Road)', 'Pilimathalawa', 
-        'Ambilipitiya (Yatinuchara Sabha)', 'Kiribathkumbura', 'Peradeniya(පේරාදොණිය)', 'Gatembe(ගැටඹේ)', 
+        'Ambilipitiya (Yatinuchara Sabha)', 'Kiribathkumbura', 'Peradeniya(පේරාදෙණිය)', 'Gatembe(ගැටඹේ)', 
         'Mulgampola(මුල්ගම්පොල)', 'Kandy(මහනුවර)'
     ];
 
@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
             service: 'NTC',
             amenities: 'Non-A/C',
             image: 'images/Rathna(XL).png',
-            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
-            departure: { time: '05:00 PM', date: '07 Mar 2025', location: 'Colombo' },
-            arrival: { time: '06:00 PM', date: '07 Mar 2025', location: 'Kandy' },
+            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' },
+            departure: { time: '05:00 PM', date: '08 Mar 2025', location: 'Colombo' },
+            arrival: { time: '06:00 PM', date: '08 Mar 2025', location: 'Kandy' },
             stops: [
                 { name: 'Colombo', time: '05:00 PM' },
                 { name: 'Maligawatta', time: '05:05 PM' },
@@ -82,202 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Pilimathalawa', time: '09:25 PM' },
                 { name: 'Ambilipitiya (Yatinuchara Sabha)', time: '09:30 PM' },
                 { name: 'Kiribathkumbura', time: '09:35 PM' },
-                { name: 'Peradeniya(පේරාදොණිය)', time: '09:40 PM' },
+                { name: 'Peradeniya(පේරාදෙණිය)', time: '09:40 PM' },
                 { name: 'Gatembe(ගැටඹේ)', time: '09:45 PM' },
                 { name: 'Mulgampola(මුල්ගම්පොල)', time: '09:50 PM' },
                 { name: 'Kandy(මහනුවර)', time: '09:55 PM' }
-            ],
-            coffeeBreak: '06:10 PM',
-            fare: {
-                'Colombo-Kandy(මහනුවර)': '350.00 LKR',
-                'Colombo-Kalutara': '50.00 LKR',
-                'Kalutara-Maharagama': '20.00 LKR',
-                'Maharagama-Kadugannawa': '30.00 LKR',
-                'Kadugannawa-Kandy': '100.00 LKR',
-                'Colombo-Maligawatta': '10.00 LKR',
-                'Maligawatta-Kelaniya': '15.00 LKR',
-                'Kelaniya-Kiribathgoda': '20.00 LKR',
-                'Kiribathgoda-Maharagama': '15.00 LKR',
-                'Maharagama-Kadugannawa': '25.00 LKR',
-                'Kadugannawa-Gehena': '15.00 LKR',
-                'Gehena-Idigahamuwa': '20.00 LKR',
-                'Idigahamuwa-Kandy': '50.00 LKR',
-            },
-            additionalInfo: {
-                typeOfSeat: 'Adjustable',
-                route: 'ExpressWay',
-                noOfSeats: 51,
-                availability: 17,
-                routeNumber: '15/87',
-                rating: 4.5
-            }
-        },
-        {
-            company: 'RATHNA Travel',
-            class: 'Normal',
-            service: 'NTC',
-            amenities: 'Non-A/C',
-            image: 'images/CTB.png',
-            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
-            departure: { time: '05:00 PM', date: '07 Mar 2025', location: 'Colombo' },
-            arrival: { time: '06:00 PM', date: '07 Mar 2025', location: 'Kandy' },
-            stops: [
-                { name: 'Colombo', time: '05:00 PM' },
-                { name: 'Maligawatta', time: '05:05 PM' },
-                { name: 'Kelani thissa', time: '05:10 PM' },
-                { name: '4th Canal / Biyagama Road', time: '05:15 PM' },
-                { name: 'Thorana Junction', time: '05:20 PM' },
-                { name: 'Kelaniya University', time: '05:25 PM' },
-                { name: 'Kiribathgoda', time: '05:30 PM' },
-                { name: 'Maharagama Junction', time: '05:35 PM' },
-                { name: 'Kadawatha', time: '05:40 PM' },
-                { name: 'Gonahena Junction', time: '05:45 PM' },
-                { name: 'Indigama Junction', time: '05:50 PM' },
-                { name: 'Kirillawala', time: '05:55 PM' },
-                { name: 'Trackmo Junction', time: '06:00 PM' },
-                { name: 'Mudungoda', time: '06:05 PM' },
-                { name: 'Miriswatta', time: '06:10 PM' },
-                { name: 'Yakkala', time: '06:15 PM' },
-                { name: 'Aluthgama', time: '06:20 PM' },
-                { name: 'Kalagedihena', time: '06:25 PM' },
-                { name: 'Thihariya', time: '06:30 PM' },
-                { name: 'Nittambuwa Sanghabodhi Maha Vidyalaya', time: '06:35 PM' },
-                { name: 'Nittambuwa', time: '06:40 PM' },
-                { name: 'Kalalpitiya', time: '06:45 PM' },
-                { name: 'Paswala', time: '06:50 PM' },
-                { name: 'Kaju Gama', time: '06:55 PM' },
-                { name: 'Radhawadunna', time: '07:00 PM' },
-                { name: 'Wewel Deniya', time: '07:05 PM' },
-                { name: 'Dummaladoniya', time: '07:10 PM' },
-                { name: 'Warakapola', time: '07:15 PM' },
-                { name: 'Ambepussa', time: '07:20 PM' },
-                { name: 'Mahena', time: '07:25 PM' },
-                { name: 'Tholangamuwa', time: '07:30 PM' },
-                { name: 'Gasnaawa Waththa Junction', time: '07:35 PM' },
-                { name: 'Nelumdoniya', time: '07:40 PM' },
-                { name: 'Batapothalla KandaUda', time: '07:45 PM' },
-                { name: 'Siyambalapitiya', time: '07:50 PM' },
-                { name: 'Balla-pana Junction', time: '07:55 PM' },
-                { name: 'Galigamuwa', time: '08:00 PM' },
-                { name: 'Ambanpitiya', time: '08:05 PM' },
-                { name: 'Rangwala Junction', time: '08:10 PM' },
-                { name: 'Kegalle', time: '08:15 PM' },
-                { name: 'Meepitiya', time: '08:20 PM' },
-                { name: 'Karangupona', time: '08:25 PM' },
-                { name: 'Mologoda', time: '08:30 PM' },
-                { name: 'Mangalgama', time: '08:35 PM' },
-                { name: 'Uthuwankanda', time: '08:40 PM' },
-                { name: 'Anwarama', time: '08:45 PM' },
-                { name: 'Mawanella', time: '08:50 PM' },
-                { name: 'Beligammana', time: '08:55 PM' },
-                { name: 'Hubula', time: '09:00 PM' },
-                { name: 'Gafanethenna', time: '09:05 PM' },
-                { name: 'Pahala Kadugannawa', time: '09:10 PM' },
-                { name: 'Kadugannawa', time: '09:15 PM' },
-                { name: 'Henachavachala (Rehela Road)', time: '09:20 PM' },
-                { name: 'Pilimathalawa', time: '09:25 PM' },
-                { name: 'Ambilipitiya (Yatinuchara Sabha)', time: '09:30 PM' },
-                { name: 'Kiribathkumbura', time: '09:35 PM' },
-                { name: 'Peradeniya(පේරාදොණිය)', time: '09:40 PM' },
-                { name: 'Gatembe(ගැටඹේ)', time: '09:45 PM' },
-                { name: 'Mulgampola(මුල්ගම්පොල)', time: '09:50 PM' },
-                { name: 'Kandy(මහනුවර)', time: '09:55 PM' }
-            ],
-            coffeeBreak: '06:10 PM',
-            fare: {
-                'Colombo-Kandy(මහනුවර)': '350.00 LKR',
-                'Colombo-Kalutara': '50.00 LKR',
-                'Kalutara-Maharagama': '20.00 LKR',
-                'Maharagama-Kadugannawa': '30.00 LKR',
-                'Kadugannawa-Kandy': '100.00 LKR',
-                'Colombo-Maligawatta': '10.00 LKR',
-                'Maligawatta-Kelaniya': '15.00 LKR',
-                'Kelaniya-Kiribathgoda': '20.00 LKR',
-                'Kiribathgoda-Maharagama': '15.00 LKR',
-                'Maharagama-Kadugannawa': '25.00 LKR',
-                'Kadugannawa-Gehena': '15.00 LKR',
-                'Gehena-Idigahamuwa': '20.00 LKR',
-                'Idigahamuwa-Kandy': '50.00 LKR',
-            },
-            additionalInfo: {
-                typeOfSeat: 'Adjustable',
-                route: 'ExpressWay',
-                noOfSeats: 51,
-                availability: 17,
-                routeNumber: '15/87',
-                rating: 4.5
-            }
-        },
-        {
-            company: 'DILSHAN Travel',
-            class: 'Semi-Luxury',
-            service: 'NTC',
-            amenities: 'Non-A/C',
-            image: 'images/CTB.png',
-            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' }, // Changed direction to 'bus'
-            departure: { time: '07:00 PM', date: '07 Mar 2025', location: 'Colombo' },
-            arrival: { time: '08:00 PM', date: '07 Mar 2025', location: 'Kandy' },
-            stops: [
-                { name: 'Colombo', time: '07:00 PM' },
-                { name: 'Maligawatta', time: '05:05 PM' },
-                { name: 'Kelani thissa', time: '05:10 PM' },
-                { name: '4th Canal / Biyagama Road', time: '05:15 PM' },
-                { name: 'Thorana Junction', time: '05:20 PM' },
-                { name: 'Kelaniya University', time: '05:25 PM' },
-                { name: 'Kiribathgoda', time: '05:30 PM' },
-                { name: 'Maharagama Junction', time: '05:35 PM' },
-                { name: 'Kadawatha', time: '05:40 PM' },
-                { name: 'Gonahena Junction', time: '05:45 PM' },
-                { name: 'Indigama Junction', time: '05:50 PM' },
-                { name: 'Kirillawala', time: '05:55 PM' },
-                { name: 'Trackmo Junction', time: '06:00 PM' },
-                { name: 'Mudungoda', time: '06:05 PM' },
-                { name: 'Miriswatta', time: '06:10 PM' },
-                { name: 'Yakkala', time: '06:15 PM' },
-                { name: 'Aluthgama', time: '06:20 PM' },
-                { name: 'Kalagedihena', time: '06:25 PM' },
-                { name: 'Thihariya', time: '06:30 PM' },
-                { name: 'Nittambuwa Sanghabodhi Maha Vidyalaya', time: '06:35 PM' },
-                { name: 'Nittambuwa', time: '06:40 PM' },
-                { name: 'Kalalpitiya', time: '06:45 PM' },
-                { name: 'Paswala', time: '06:50 PM' },
-                { name: 'Kaju Gama', time: '06:55 PM' },
-                { name: 'Radhawadunna', time: '07:00 PM' },
-                { name: 'Wewel Deniya', time: '07:05 PM' },
-                { name: 'Dummaladoniya', time: '07:10 PM' },
-                { name: 'Warakapola', time: '07:15 PM' },
-                { name: 'Ambepussa', time: '07:20 PM' },
-                { name: 'Mahena', time: '07:25 PM' },
-                { name: 'Tholangamuwa', time: '07:30 PM' },
-                { name: 'Gasnaawa Waththa Junction', time: '07:35 PM' },
-                { name: 'Nelumdoniya', time: '07:40 PM' },
-                { name: 'Batapothalla KandaUda', time: '07:45 PM' },
-                { name: 'Siyambalapitiya', time: '07:50 PM' },
-                { name: 'Balla-pana Junction', time: '07:55 PM' },
-                { name: 'Galigamuwa', time: '08:00 PM' },
-                { name: 'Ambanpitiya', time: '08:05 PM' },
-                { name: 'Rangwala Junction', time: '08:10 PM' },
-                { name: 'Kegalle', time: '08:15 PM' },
-                { name: 'Meepitiya', time: '08:20 PM' },
-                { name: 'Karangupona', time: '08:25 PM' },
-                { name: 'Mologoda', time: '08:30 PM' },
-                { name: 'Mangalgama', time: '08:35 PM' },
-                { name: 'Uthuwankanda', time: '08:40 PM' },
-                { name: 'Anwarama', time: '08:45 PM' },
-                { name: 'Mawanella', time: '08:50 PM' },
-                { name: 'Beligammana', time: '08:55 PM' },
-                { name: 'Hubula', time: '09:00 PM' },
-                { name: 'Gafanethenna', time: '09:05 PM' },
-                { name: 'Pahala Kadugannawa', time: '09:10 PM' },
-                { name: 'Kadugannawa', time: '09:15 PM' },
-                { name: 'Henachavachala (Rehela Road)', time: '09:20 PM' },
-                { name: 'Pilimathalawa', time: '09:25 PM' },
-                { name: 'Ambilipitiya (Yatinuchara Sabha)', time: '09:30 PM' },
-                { name: 'Kiribathkumbura', time: '09:35 PM' },
-                { name: 'Peradeniya(පේරාදොණිය)', time: '09:40 PM' },
-                { name: 'Gatembe(ගැටඹේ)', time: '09:45 PM' },
-                { name: 'Mulgampola(මුල්ගම්පොල)', time: '09:50 PM' },
-                { name: 'Kandy(මහනුවර)', time: '11:55 PM' }
             ],
             coffeeBreak: '06:10 PM',
             fare: {
@@ -316,6 +124,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchResults = document.getElementById('search-results');
     const classOptions = document.querySelectorAll('.class-option');
     const modeOptions = document.querySelectorAll('.mode-option');
+    const additionalSearchBtn = document.getElementById('additional-search-btn');
+    const advancedMenu = document.getElementById('advanced-menu');
+    const searchButton = document.getElementById('search-button');
 
     // Set today's date as default
     const today = new Date().toISOString().split('T')[0];
@@ -331,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('selected');
             selectedClass = this.getAttribute('data-class');
             console.log('Selected Class:', selectedClass);
-            performSearch(); // Trigger search on class selection
+            performSearch();
         });
     });
 
@@ -341,8 +152,28 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             selectedMode = this.getAttribute('data-mode');
             console.log('Selected Mode:', selectedMode);
-            performSearch(); // Trigger search on mode selection
+            performSearch();
         });
+    });
+
+    // Toggle advanced menu via Additional Search button
+    additionalSearchBtn.addEventListener('click', function() {
+        const isActive = advancedMenu.classList.toggle('active');
+        this.classList.toggle('active');
+        if (isActive) {
+            advancedMenu.style.maxHeight = `${advancedMenu.scrollHeight}px`;
+        } else {
+            advancedMenu.style.maxHeight = '0';
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!advancedMenu.contains(e.target) && !additionalSearchBtn.contains(e.target)) {
+            advancedMenu.classList.remove('active');
+            advancedMenu.style.maxHeight = '0';
+            additionalSearchBtn.classList.remove('active');
+        }
     });
 
     // Autocomplete function
@@ -358,14 +189,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     div.addEventListener('click', function() {
                         input.value = suggestion;
                         autocompleteList.style.display = 'none';
-                        performSearch(); // Trigger search on location selection
+                        performSearch();
                     });
                     autocompleteList.appendChild(div);
                 });
                 autocompleteList.style.display = suggestions.length > 0 ? 'block' : 'none';
             } else {
                 autocompleteList.style.display = 'none';
-                performSearch(); // Trigger search when input is cleared
+                performSearch();
             }
         });
 
@@ -380,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showAutocomplete(fromLocation, fromAutocomplete, locations);
     showAutocomplete(toLocation, toAutocomplete, locations);
 
-    // Automatic Search Function
+    // Search Function
     function performSearch() {
         const from = fromLocation.value.trim();
         const to = toLocation.value.trim();
@@ -416,9 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const matchesLocation = fromIndex !== -1 && toIndex !== -1 && fromIndex < toIndex;
             const matchesDate = bus.departure.date === formattedDate;
             const matchesClass = !selectedClass || (selectedClass && bus.class === selectedClass);
-            const matchesMode = bus.route.direction === selectedMode; // Compare with selectedMode
+            const matchesMode = bus.route.direction === selectedMode;
             const busDepartureTime = convertTo24Hour(bus.departure.time);
-            const matchesTime = compareTimes(searchTime, busDepartureTime) <= 0;
+            const matchesTime = !time || compareTimes(searchTime, busDepartureTime) <= 0;
 
             if (matchesLocation) locationFailed = false;
             if (matchesDate) dateFailed = false;
@@ -493,17 +324,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add event listeners for automatic search on input change
-    [fromLocation, toLocation, travelDate, travelTime].forEach(input => {
-        input.addEventListener('input', () => {
-            console.log(`Input changed: ${input.id} = ${input.value}`);
-            performSearch();
-        });
-        input.addEventListener('change', () => {
-            console.log(`Change event: ${input.id} = ${input.value}`);
-            performSearch();
-        });
-    });
+    // Add event listener for search button
+    searchButton.addEventListener('click', performSearch);
 
     // Helper functions
     function formatDate(dateString) {
@@ -515,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function convertTo24Hour(timeStr) {
-        // Handle cases where time might not include AM/PM (e.g., from input type="time")
+        if (!timeStr) return '00:00:00'; // Default to midnight if no time is provided
         if (!timeStr.includes(' ')) {
             const [hours, minutes] = timeStr.split(':');
             return `${hours}:${minutes}:00`;

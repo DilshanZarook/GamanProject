@@ -60,60 +60,74 @@
                 </div>
 
                 <div class="search-form">
-                    <div class="location-selectors">
-                        <div class="autocomplete-container">
-                            <label for="from-location">From:</label>
-                            <input type="text" id="from-location" placeholder="Type to search...">
-                            <div id="from-autocomplete" class="autocomplete-list"></div>
-                        </div>
-
-                        <div class="direction-arrow">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                        <div class="autocomplete-container">
-                            <label for="to-location">To:</label>
-                            <input type="text" id="to-location" placeholder="Type to search...">
-                            <div id="to-autocomplete" class="autocomplete-list"></div>
-                        </div>
-                    </div>
-
-                    <div class="date-time-selectors">
-                        <div class="date-picker">
-                            <label for="travel-date">Date:</label>
-                            <input type="date" id="travel-date" name="travel-date">
-                        </div>
-
-                        <div class="time-picker">
-                            <label for="travel-time">Time:</label>
-                            <input type="time" id="travel-time" name="travel-time" value="">
-                        </div>
-                    </div>
-
-                    <div class="transport-options">
-                        <div class="mode-static">
-                            <div class="mode-option active" data-mode="bus">
-                                <i class="fa-solid fa-bus"></i>
-                                <span></span>
+                    <!-- Primary Fields (Always Visible) -->
+                    <div class="primary-fields">
+                        <div class="location-selectors">
+                            <div class="autocomplete-container">
+                                <label for="from-location">From:</label>
+                                <input type="text" id="from-location" placeholder="Type to search...">
+                                <div id="from-autocomplete" class="autocomplete-list"></div>
                             </div>
-                            <div class="mode-option" data-mode="train">
-                                <i class="fa-solid fa-train"></i>
-                                <span></span>
+
+                            <div class="direction-arrow">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+
+                            <div class="autocomplete-container">
+                                <label for="to-location">To:</label>
+                                <input type="text" id="to-location" placeholder="Type to search...">
+                                <div id="to-autocomplete" class="autocomplete-list"></div>
                             </div>
                         </div>
 
-                        <div class="bus-class">
-                            <span>Choose Class:</span>
-                            <div class="class-options">
-                                <button class="class-option" data-class="Normal">N</button>
-                                <button class="class-option" data-class="Semi-Luxury">S</button>
-                                <button class="class-option" data-class="Luxury">L</button>
-                                <button class="class-option" data-class="Super Luxury">XL</button>
+                        <div class="date-time-selectors">
+                            <div class="date-picker">
+                                <label for="travel-date">Date:</label>
+                                <input type="date" id="travel-date" name="travel-date">
+                            </div>
+                            <div class="button-group">
+                                <button class="additional-search-btn" id="additional-search-btn">
+                                    <span>Additional Search</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                                <!-- <button id="search-button" class="search-button">Search</button> -->
+                            </div>
+                            <div class="advanced-options-container">
+                                <!-- Single Advanced Options Menu -->
+                                <div id="advanced-menu" class="advanced-menu">
+                                    <div class="advanced-option-content">
+                                        <div class="date-time-selectors">
+                                            <div class="time-picker">
+                                                <label for="travel-time">Time:</label>
+                                                <input type="time" id="travel-time" name="travel-time" value="">
+                                            </div>
+                                        </div>
+                                        <div class="transport-options">
+                                            <div class="mode-static">
+                                                <div class="mode-option active" data-mode="bus">
+                                                    <i class="fa-solid fa-bus"></i>
+                                                    <span></span>
+                                                </div>
+                                                <div class="mode-option" data-mode="train">
+                                                    <i class="fa-solid fa-train"></i>
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                            <div class="bus-class">
+                                                <span>Choose Class:</span>
+                                                <div class="class-options">
+                                                    <button class="class-option" data-class="Normal">N</button>
+                                                    <button class="class-option" data-class="Semi-Luxury">S</button>
+                                                    <button class="class-option" data-class="Luxury">L</button>
+                                                    <button class="class-option" data-class="Super Luxury">XL</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <button id="search-button" class="search-button">Search</button>
                 </div>
 
                 <!-- Search Results -->
