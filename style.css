@@ -467,12 +467,13 @@ body {
 .bus-item {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: var(--shadow);
     background-color: var(--card-bg);
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .bus-item:hover {
@@ -487,6 +488,7 @@ body {
 }
 
 .bus-details {
+    
     margin: auto;
     width: 150px;
     padding: 15px;
@@ -498,6 +500,7 @@ body {
     font-size: 18px;
     margin-bottom: 5px;
     color: var(--secondary-color);
+    margin-right: 10px;
     white-space: nowrap; /* Prevent text wrapping */
 
 }
@@ -875,26 +878,31 @@ body {
     }
 }
 
-/* Direction Arrow Styles */
-.direction-arrow {
-    margin-top: 27px;
-    width: 30px;
-    height: 30px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.3s;
+
+.additional-info-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
 }
 
-.direction-arrow.reversed i {
+.additional-info-panel.active {
+    /* max-height is set dynamically via JavaScript */
+}
+
+.additional-info {
+    cursor: pointer;
+}
+
+.additional-info .fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.additional-info.active .fa-chevron-down {
     transform: rotate(180deg);
 }
 
-.direction-arrow i {
-    font-size: 16px;
+/* Optional: Ensure buttons don't interfere with card click */
+.send-info, .book-now {
+    cursor: pointer;
+    /* Add any specific styling to differentiate buttons */
 }
