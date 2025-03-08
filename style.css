@@ -906,3 +906,27 @@ body {
     cursor: pointer;
     /* Add any specific styling to differentiate buttons */
 }
+
+/* Direction Arrow Styles */
+.direction-arrow {
+    margin-top: 27px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.direction-arrow.reversed i {
+    transform: rotate(180deg);
+}
+
+.direction-arrow i {
+    font-size: 16px;
+}
