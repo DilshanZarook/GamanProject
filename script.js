@@ -1,30 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Sample locations (as provided)
     const locations = [
-        'Colombo', 'Maligawatta', 'Kelani thissa', '4th Canal / Biyagama Road', 'Thorana Junction', 
-        'Kelaniya University', 'Kiribathgoda', 'Maharagama Junction', 'Kadawatha', 'Gonahena Junction', 
-        'Indigama Junction', 'Kirillawala', 'Trackmo Junction', 'Mudungoda', 'Miriswatta', 'Yakkala', 
-        'Aluthgama', 'Kalagedihena', 'Thihariya', 'Nittambuwa Sanghabodhi Maha Vidyalaya', 'Nittambuwa', 
-        'Kalalpitiya', 'Paswala', 'Kaju Gama', 'Radhawadunna', 'Wewel Deniya', 'Dummaladoniya', 'Warakapola', 
-        'Ambepussa', 'Mahena', 'Tholangamuwa', 'Gasnaawa Waththa Junction', 'Nelumdoniya', 'Batapothalla KandaUda', 
-        'Siyambalapitiya', 'Balla-pana Junction', 'Galigamuwa', 'Ambanpitiya', 'Rangwala Junction', 'Kegalle', 
-        'Meepitiya', 'Karangupona', 'Mologoda', 'Mangalgama', 'Uthuwankanda', 'Anwarama', 'Mawanella', 'Beligammana', 
-        'Hubula', 'Gafanethenna', 'Pahala Kadugannawa', 'Kadugannawa', 'Henachavachala (Rehela Road)', 'Pilimathalawa', 
-        'Ambilipitiya (Yatinuchara Sabha)', 'Kiribathkumbura', 'Peradeniya(පේරාදෙණිය)', 'Gatembe(ගැටඹේ)', 
+        'Colombo', 'Maligawatta', 'Kelani thissa', '4th Canal / Biyagama Road', 'Thorana Junction',
+        'Kelaniya University', 'Kiribathgoda', 'Maharagama Junction', 'Kadawatha', 'Gonahena Junction',
+        'Indigama Junction', 'Kirillawala', 'Trackmo Junction', 'Mudungoda', 'Miriswatta', 'Yakkala',
+        'Aluthgama', 'Kalagedihena', 'Thihariya', 'Nittambuwa Sanghabodhi Maha Vidyalaya', 'Nittambuwa',
+        'Kalalpitiya', 'Paswala', 'Kaju Gama', 'Radhawadunna', 'Wewel Deniya', 'Dummaladoniya', 'Warakapola',
+        'Ambepussa', 'Mahena', 'Tholangamuwa', 'Gasnaawa Waththa Junction', 'Nelumdoniya', 'Batapothalla KandaUda',
+        'Siyambalapitiya', 'Balla-pana Junction', 'Galigamuwa', 'Ambanpitiya', 'Rangwala Junction', 'Kegalle',
+        'Meepitiya', 'Karangupona', 'Mologoda', 'Mangalgama', 'Uthuwankanda', 'Anwarama', 'Mawanella', 'Beligammana',
+        'Hubula', 'Gafanethenna', 'Pahala Kadugannawa', 'Kadugannawa', 'Henachavachala (Rehela Road)', 'Pilimathalawa',
+        'Ambilipitiya (Yatinuchara Sabha)', 'Kiribathkumbura', 'Peradeniya(පේරාදෙණිය)', 'Gatembe(ගැටඹේ)',
         'Mulgampola(මුල්ගම්පොල)', 'Kandy(මහනුවර)'
     ];
 
     // Sample bus data with 60 stops (as provided)
     const buses = [
         {
-            company: 'Bigidy Travels',
+            company: 'Dilshan Travels',
             class: 'Normal',
             service: 'NTC',
             amenities: 'Non-A/C',
-            image: 'images/Rathna(XL).png',
-            route: { direction: 'bus', start: 'Colombo', end: 'Kandy' },
+            image: 'images/rathnanormal.png',
+            route: { direction: 'bus', start: 'Colombo', end: 'Kandy(මහනුවර)' },
             departure: { time: '05:00 PM', date: '08 Mar 2025', location: 'Colombo' },
-            arrival: { time: '06:00 PM', date: '08 Mar 2025', location: 'Kandy' },
+            arrival: { time: '06:00 PM', date: '08 Mar 2025', location: 'Kandy(මහනුවර)' },
             stops: [
                 { name: 'Colombo', time: '05:00 PM' },
                 { name: 'Maligawatta', time: '05:05 PM' },
@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             coffeeBreak: '06:10 PM',
             fare: {
                 'Colombo-Kandy(මහනුවර)': '350.00 LKR',
+                'Kandy(මහනුවර)-Colombo': '350.00 LKR', // Added for reverse direction
                 'Colombo-Kalutara': '50.00 LKR',
                 'Kalutara-Maharagama': '20.00 LKR',
                 'Maharagama-Kadugannawa': '30.00 LKR',
@@ -111,6 +112,103 @@ document.addEventListener('DOMContentLoaded', function() {
                 routeNumber: '15/87',
                 rating: 4.5
             }
+        },
+        {
+            company: 'Bigidy Travels',
+            class: 'Normal',
+            service: 'NTC',
+            amenities: 'Non-A/C',
+            image: 'images/Rathna(XL).png',
+            route: { direction: 'bus', start: 'Kandy(මහනුවර)', end: 'Colombo' },
+            departure: { time: '10:00 AM', date: '08 Mar 2025', location: 'Kandy(මහනුවර)' },
+            arrival: { time: '02:55 PM', date: '08 Mar 2025', location: 'Colombo' },
+            stops: [
+                { name: 'Kandy(මහනුවර)', time: '10:00 AM' },
+                { name: 'Mulgampola(මුල්ගම්පොල)', time: '10:05 AM' },
+                { name: 'Gatembe(ගැටඹේ)', time: '10:10 AM' },
+                { name: 'Peradeniya(පේරාදෙණිය)', time: '10:15 AM' },
+                { name: 'Kiribathkumbura', time: '10:20 AM' },
+                { name: 'Ambilipitiya (Yatinuchara Sabha)', time: '10:25 AM' },
+                { name: 'Pilimathalawa', time: '10:30 AM' },
+                { name: 'Henachavachala (Rehela Road)', time: '10:35 AM' },
+                { name: 'Kadugannawa', time: '10:40 AM' },
+                { name: 'Pahala Kadugannawa', time: '10:45 AM' },
+                { name: 'Gafanethenna', time: '10:50 AM' },
+                { name: 'Hubula', time: '10:55 AM' },
+                { name: 'Beligammana', time: '11:00 AM' },
+                { name: 'Mawanella', time: '11:05 AM' },
+                { name: 'Anwarama', time: '11:10 AM' },
+                { name: 'Uthuwankanda', time: '11:15 AM' },
+                { name: 'Mangalgama', time: '11:20 AM' },
+                { name: 'Mologoda', time: '11:25 AM' },
+                { name: 'Karangupona', time: '11:30 AM' },
+                { name: 'Meepitiya', time: '11:35 AM' },
+                { name: 'Kegalle', time: '11:40 AM' },
+                { name: 'Rangwala Junction', time: '11:45 AM' },
+                { name: 'Ambanpitiya', time: '11:50 AM' },
+                { name: 'Galigamuwa', time: '11:55 AM' },
+                { name: 'Balla-pana Junction', time: '12:00 PM' },
+                { name: 'Siyambalapitiya', time: '12:05 PM' },
+                { name: 'Batapothalla KandaUda', time: '12:10 PM' },
+                { name: 'Nelumdoniya', time: '12:15 PM' },
+                { name: 'Gasnaawa Waththa Junction', time: '12:20 PM' },
+                { name: 'Tholangamuwa', time: '12:25 PM' },
+                { name: 'Mahena', time: '12:30 PM' },
+                { name: 'Ambepussa', time: '12:35 PM' },
+                { name: 'Warakapola', time: '12:40 PM' },
+                { name: 'Dummaladoniya', time: '12:45 PM' },
+                { name: 'Wewel Deniya', time: '12:50 PM' },
+                { name: 'Radhawadunna', time: '12:55 PM' },
+                { name: 'Kaju Gama', time: '01:00 PM' },
+                { name: 'Paswala', time: '01:05 PM' },
+                { name: 'Kalalpitiya', time: '01:10 PM' },
+                { name: 'Nittambuwa', time: '01:15 PM' },
+                { name: 'Nittambuwa Sanghabodhi Maha Vidyalaya', time: '01:20 PM' },
+                { name: 'Thihariya', time: '01:25 PM' },
+                { name: 'Kalagedihena', time: '01:30 PM' },
+                { name: 'Aluthgama', time: '01:35 PM' },
+                { name: 'Yakkala', time: '01:40 PM' },
+                { name: 'Miriswatta', time: '01:45 PM' },
+                { name: 'Mudungoda', time: '01:50 PM' },
+                { name: 'Trackmo Junction', time: '01:55 PM' },
+                { name: 'Kirillawala', time: '02:00 PM' },
+                { name: 'Indigama Junction', time: '02:05 PM' },
+                { name: 'Gonahena Junction', time: '02:10 PM' },
+                { name: 'Kadawatha', time: '02:15 PM' },
+                { name: 'Maharagama Junction', time: '02:20 PM' },
+                { name: 'Kiribathgoda', time: '02:25 PM' },
+                { name: 'Kelaniya University', time: '02:30 PM' },
+                { name: 'Thorana Junction', time: '02:35 PM' },
+                { name: '4th Canal / Biyagama Road', time: '02:40 PM' },
+                { name: 'Kelani thissa', time: '02:45 PM' },
+                { name: 'Maligawatta', time: '02:50 PM' },
+                { name: 'Colombo', time: '02:55 PM' }
+            ],
+            coffeeBreak: '12:45 PM',
+            fare: {
+                'Kandy(මහනුවර)-Colombo': '350.00 LKR',
+                'Colombo-Kandy(මහනුවර)': '350.00 LKR', // Already exists in the first bus
+                'Colombo-Kalutara': '50.00 LKR',
+                'Kalutara-Maharagama': '20.00 LKR',
+                'Maharagama-Kadugannawa': '30.00 LKR',
+                'Kadugannawa-Kandy': '100.00 LKR',
+                'Colombo-Maligawatta': '10.00 LKR',
+                'Maligawatta-Kelaniya': '15.00 LKR',
+                'Kelaniya-Kiribathgoda': '20.00 LKR',
+                'Kiribathgoda-Maharagama': '15.00 LKR',
+                'Maharagama-Kadugannawa': '25.00 LKR',
+                'Kadugannawa-Gehena': '15.00 LKR',
+                'Gehena-Idigahamuwa': '20.00 LKR',
+                'Idigahamuwa-Kandy': '50.00 LKR',
+            },
+            additionalInfo: {
+                typeOfSeat: 'Adjustable',
+                route: 'ExpressWay',
+                noOfSeats: 51,
+                availability: 15,
+                routeNumber: '15/88',
+                rating: 4.6
+            }
         }
     ];
 
@@ -127,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const additionalSearchBtn = document.getElementById('additional-search-btn');
     const advancedMenu = document.getElementById('advanced-menu');
     const searchButton = document.getElementById('search-button');
+    const directionArrow = document.querySelector('.direction-arrow');
 
     // Set today's date as default
     const today = new Date().toISOString().split('T')[0];
@@ -210,6 +309,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize autocomplete for both inputs
     showAutocomplete(fromLocation, fromAutocomplete, locations);
     showAutocomplete(toLocation, toAutocomplete, locations);
+
+    // Direction Arrow Switch Functionality
+    directionArrow.addEventListener('click', function() {
+        const fromValue = fromLocation.value;
+        const toValue = toLocation.value;
+
+        // Swap the values
+        fromLocation.value = toValue;
+        toLocation.value = fromValue;
+
+        // Toggle arrow direction (rotate 180 degrees)
+        directionArrow.classList.toggle('reversed');
+
+        // Trigger search with new direction
+        performSearch();
+    });
 
     // Search Function
     function performSearch() {
@@ -375,6 +490,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 
                 <div class="departure-info">
+                    <img src="images/arrrowgreen.png" alt="Departure Arrow">
                     <div class="time">${bus.departure.time}</div>
                     <div class="date">${bus.departure.date}</div>
                     <div class="location">${bus.departure.location}</div>
@@ -405,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 
                 <div class="arrival-info">
+                    <img src="images/arrowred.png" alt="Arrival Arrow">
                     <div class="time">${bus.arrival.time}</div>
                     <div class="date">${bus.arrival.date}</div>
                     <div class="location">${bus.arrival.location}</div>
@@ -412,10 +529,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <div class="price-details">
                     <div class="price">${bus.fare}</div>
-                    <div class="additional-info">
-                        <span>Additional Info</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
                     <div class="action-buttons">
                         <button class="send-info">
                             <i class="fa-brands fa-whatsapp"></i>
@@ -425,6 +538,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fa-solid fa-ticket"></i>
                             Book Now
                         </button>
+                    </div>
+                    <div class="additional-info">
+                        <span>Additional Info</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                 </div>
             </div>
