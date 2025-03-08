@@ -486,6 +486,7 @@ body {
 }
 
 .bus-details {
+    margin: auto;
     width: 150px;
     padding: 15px;
     border-right: 1px solid var(--light-gray);
@@ -496,6 +497,8 @@ body {
     font-size: 18px;
     margin-bottom: 5px;
     color: var(--secondary-color);
+    white-space: nowrap; /* Prevent text wrapping */
+
 }
 
 .bus-type {
@@ -520,7 +523,8 @@ body {
 }
 
 .bus-image {
-    width: 100px;
+    margin: auto;
+    width: 150px;
     padding: 15px;
     display: flex;
     align-items: center;
@@ -532,6 +536,7 @@ body {
 }
 
 .departure-info {
+    margin: auto;
     width: 120px;
     padding: 15px;
     text-align: center;
@@ -556,6 +561,7 @@ body {
 }
 
 .journey-route {
+    margin: auto;
     flex-grow: 1;
     padding: 15px;
     position: relative;
@@ -565,16 +571,16 @@ body {
 
 .route-line {
     position: relative;
-    height: 6px;
-    background: linear-gradient(to right, var(--green-timeline), var(--yellow-timeline), var(--red-timeline));
+    height: 10px;
+    background: linear-gradient(to right, var(--secondary-text), var(--background-color), var(--secondary-text));
     width: 100%;
     border-radius: 3px;
 }
 
 .stop-point {
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 19px;
+    height: 19px;
     border-radius: 50%;
     background-color: var(--white);
     top: -4px;
@@ -600,7 +606,7 @@ body {
 
 .coffee-break {
     position: absolute;
-    top: 0px;
+    top: -30px;
     left: 35%;
     text-align: center;
 }
@@ -624,13 +630,13 @@ body {
 
 .start-label {
     left: 0;
-    top: 15px;
+    bottom: -30px;
 }
 
 .middle-label {
     left: 50%;
     transform: translateX(-50%);
-    bottom: -30px;
+    top: 20px;
 }
 
 .end-label {
@@ -644,12 +650,14 @@ body {
 }
 
 .arrival-info {
+    margin: auto;
     width: 120px;
     padding: 15px;
     text-align: center;
 }
 
 .price-details {
+    margin: auto;
     width: 200px;
     padding: 15px;
     border-left: 1px solid var(--light-gray);
@@ -698,11 +706,11 @@ body {
 }
 
 .send-info {
-    background-color: var(--whatsapp-green);
+    background-color: var(--secondary-text);
 }
 
 .send-info:hover {
-    background-color: #1da851;
+    background-color: var(--whatsapp-green);
 }
 
 .book-now {

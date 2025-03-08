@@ -382,9 +382,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <div class="journey-route">
                     <div class="route-line">
-                        ${bus.stops.map((_, index) => `
-                            <div class="stop-point ${index === 0 ? 'start-point' : index === bus.stops.length - 1 ? 'end-point' : 'middle-point'}"></div>
-                        `).join('')}
+                        ${bus.stops
+                            .filter((_, index) => index === 0 || index === bus.stops.length - 1)
+                            .map((_, index) => `
+                                <div class="stop-point ${index === 0 ? 'start-point' : 'end-point'}"></div>
+                            `).join('')}
                     </div>
                     
                     <div class="coffee-break">
@@ -392,12 +394,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="coffee-time">${bus.coffeeBreak}</div>
                     </div>
                     
-                    ${bus.stops.map((stop, index) => `
-                        <div class="stop-label ${index === 0 ? 'start-label' : index === bus.stops.length - 1 ? 'end-label' : 'middle-label'}">
-                            <div class="stop-name">${stop.name}</div>
-                            <div class="stop-time">${stop.time}</div>
-                        </div>
-                    `).join('')}
+                    ${bus.stops
+                        .filter((_, index) => index === 0 || index === bus.stops.length - 1)
+                        .map((stop, index) => `
+                            <div class="stop-label ${index === 0 ? 'start-label' : 'end-label'}">
+                                <div class="stop-name">${stop.name}</div>
+                                <div class="stop-time">${stop.time}</div>
+                            </div>
+                        `).join('')}
                 </div>
                 
                 <div class="arrival-info">
@@ -463,24 +467,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const additionalInfoBtn = busItem.querySelector('.additional-info');
         const additionalInfoPanel = busItem.querySelector('.additional-info-panel');
-
+    
         additionalInfoBtn.addEventListener('click', () => {
             additionalInfoPanel.classList.toggle('active');
             additionalInfoBtn.classList.toggle('active');
-
+    
             if (additionalInfoPanel.classList.contains('active')) {
                 additionalInfoPanel.style.maxHeight = `${additionalInfoPanel.scrollHeight}px`;
             } else {
                 additionalInfoPanel.style.maxHeight = '0';
             }
         });
-
+    
         const sendInfoBtn = busItem.querySelector('.send-info');
         sendInfoBtn.addEventListener('click', () => alert('Info would be sent via WhatsApp'));
-
+    
         const bookNowBtn = busItem.querySelector('.book-now');
         bookNowBtn.addEventListener('click', () => alert('Booking process would start here'));
-
+    
         return busItem;
     }
 
