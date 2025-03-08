@@ -287,6 +287,11 @@ body {
     background-color: var(--white);
 }
 
+.date-picker input[type="date"]:focus, .time-picker input[type="time"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
 .button-group {
     display: flex;
     gap: 15px;
