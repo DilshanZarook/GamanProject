@@ -108,6 +108,7 @@ body {
     border-bottom: 1px solid var(--light-gray);
     box-shadow: var(--shadow);
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 .header-title h1 {
