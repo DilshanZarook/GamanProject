@@ -36,15 +36,28 @@ while ($busRow = $busResult->fetch_assoc()) {
     $stopOrderMap = [];
     $locationIdMap = [];
 
+    // Calculate total journey duration in seconds
+    $departureTime = strtotime($schedule['departure_time']);
+    $arrivalTime = strtotime($schedule['arrival_time']);
+    $journeyDuration = $arrivalTime - $departureTime; // Total duration in seconds
+
+    // Count total stops to calculate time increment per stop
+    $stopsResult->data_seek(0); // Reset pointer to count stops
+    $totalStops = $stopsResult->num_rows;
+    $timeIncrementPerStop = $totalStops > 1 ? $journeyDuration / ($totalStops - 1) : 0; // Time increment per stop in seconds
+
+    $currentStopIndex = 0;
     while ($stopRow = $stopsResult->fetch_assoc()) {
-        $stopTime = $schedule['departure_time']; // Fallback (add stop_time column if needed)
+        // Calculate stop time based on index and increment
+        $stopTime = $departureTime + ($currentStopIndex * $timeIncrementPerStop);
         $stop = [
             'name' => $stopRow['name'],
-            'time' => date('h:i A', strtotime($stopTime))
+            'time' => date('h:i A', $stopTime)
         ];
         $stops[] = $stop;
         $stopOrderMap[$stopRow['name']] = $stopRow['stop_order'];
         $locationIdMap[$stopRow['name']] = $stopRow['location_id'];
+        $currentStopIndex++;
     }
 
     $firstStop = $stops[0]['name'];

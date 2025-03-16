@@ -580,7 +580,7 @@ body {
 .route-line {
     position: relative;
     height: 10px;
-    background: linear-gradient(to right, var(--secondary-text), var(--background-color), var(--secondary-text));
+    background: #CCCDCE;
     width: 100%;
     border-radius: 3px;
 }
@@ -598,7 +598,22 @@ body {
 
 .start-point {
     left: 0;
-    border-color: var(--green-timeline);
+    border-width: 5px; /* Increase border size */
+    border-color: #C1EDC3;
+    background-color: var(--green-timeline);
+}
+
+.middle-point1{
+    border-width: 5px; /* Increase border size */
+    border-color: #F3E3B2;
+    background-color: var(--yellow-timeline);
+}
+
+.middle-point2{
+    border-width: 5px; /* Increase border size */
+    border-color: #f69267;
+    background-color: #ff4d00;
+
 }
 
 .middle-point {
@@ -609,8 +624,12 @@ body {
 
 .end-point {
     right: 0;
-    border-color: var(--red-timeline);
+    border-width: 5px; /* Increase border size */
+    border-style: solid;
+    border-color: #F79089;
+    background-color: var(--red-timeline);
 }
+
 
 .coffee-break {
     position: absolute;

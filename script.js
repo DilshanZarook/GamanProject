@@ -327,11 +327,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                <div class="journey-route">
                     <div class="route-line">
-                        ${bus.stops
-                            .filter((_, index) => index === 0 || index === bus.stops.length - 1)
-                            .map((_, index) => `
-                                <div class="stop-point ${index === 0 ? 'start-point' : 'end-point'}"></div>
-                            `).join('')}
+                        ${(() => {
+                            const fromIndex = bus.allStops.findIndex(stop => 
+                                stop.name.toLowerCase() === bus.departure.location.toLowerCase());
+                            const toIndex = bus.allStops.findIndex(stop => 
+                                stop.name.toLowerCase() === bus.arrival.location.toLowerCase());
+
+                            // Calculate two middle points
+                            const middleIndex1 = Math.floor(fromIndex + (toIndex - fromIndex) / 3);
+                            const middleIndex2 = Math.floor(fromIndex + 2 * (toIndex - fromIndex) / 3);
+
+                            return `
+                                <div class="stop-point start-point"></div>
+                                <div class="stop-point middle-point1" style="left: 33%;"></div>
+                                <div class="stop-point middle-point2" style="left: 66%;"></div>
+                                <div class="stop-point end-point"></div>
+                            `;
+                        })()}
                     </div>
                     
                     <div class="coffee-break">
@@ -339,18 +351,47 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="coffee-time">${bus.coffeeBreak}</div>
                     </div>
                     
-                    ${bus.stops
-                        .filter((_, index) => index === 0 || index === bus.stops.length - 1)
-                        .map((stop, index) => {
-                            const englishName = stop.name.match(/\((.*?)\)/)?.[1] || stop.name; // Extract English name inside parentheses
-                            return `
-                                <div class="stop-label ${index === 0 ? 'start-label' : 'end-label'}">
-                                    <div class="stop-name">${englishName}</div>
-                                    <div class="stop-time">${stop.time}</div>
-                                </div>
-                            `;
-                        }).join('')}
+                    ${(() => {
+                        const fromIndex = bus.allStops.findIndex(stop => 
+                            stop.name.toLowerCase() === bus.departure.location.toLowerCase());
+                        const toIndex = bus.allStops.findIndex(stop => 
+                            stop.name.toLowerCase() === bus.arrival.location.toLowerCase());
+
+                        // Calculate two middle points
+                        const middleIndex1 = Math.floor(fromIndex + (toIndex - fromIndex) / 3);
+                        const middleIndex2 = Math.floor(fromIndex + 2 * (toIndex - fromIndex) / 3);
+
+                        const startStop = bus.allStops[fromIndex];
+                        const middleStop1 = bus.allStops[middleIndex1];
+                        const middleStop2 = bus.allStops[middleIndex2];
+                        const endStop = bus.allStops[toIndex];
+
+                        const getEnglishName = (stop) => stop.name.match(/\((.*?)\)/)?.[1] || stop.name;
+
+                        return `
+                            <div class="stop-label start-label" style="color: green;">
+                                <div class="stop-name">${getEnglishName(startStop)}</div>
+                                <div class="stop-time">${startStop.time}</div>
+                            </div>
+                            
+                            <div class="stop-label middle-label1" style="left: 33%; transform: translateX(-50%); top: 40px;">
+                                <div class="stop-name">${getEnglishName(middleStop1)}</div>
+                                <div class="stop-time">${middleStop1.time}</div>
+                            </div>
+
+                            <div class="stop-label middle-label2" style="left: 66%; transform: translateX(-50%); top: 40px;">
+                                <div class="stop-name">${getEnglishName(middleStop2)}</div>
+                                <div class="stop-time">${middleStop2.time}</div>
+                            </div>
+
+                            <div class="stop-label end-label" style="color: red;">
+                                <div class="stop-name">${getEnglishName(endStop)}</div>
+                                <div class="stop-time">${endStop.time}</div>
+                            </div>
+                        `;
+                    })()}
                 </div>
+
 
                 
                 <div class="arrival-info">
