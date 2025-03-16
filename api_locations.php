@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 $host = 'localhost';
-$dbname = 'bus_booking';
+$dbname = 'SLBus';
 $username = 'root';
 $password = '';
 

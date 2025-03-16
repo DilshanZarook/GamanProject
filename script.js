@@ -319,10 +319,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="images/arrrowgreen.png" alt="Departure Arrow">
                     <div class="time">${bus.departure.time}</div>
                     <div class="date">${bus.departure.date}</div>
-                    <div class="location">${bus.departure.location}</div>
+                    <div class="location">
+                        ${bus.departure.location.match(/\((.*?)\)/)?.[1] || bus.departure.location}
+                    </div>
                 </div>
+
                 
-                <div class="journey-route">
+               <div class="journey-route">
                     <div class="route-line">
                         ${bus.stops
                             .filter((_, index) => index === 0 || index === bus.stops.length - 1)
@@ -338,19 +341,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     ${bus.stops
                         .filter((_, index) => index === 0 || index === bus.stops.length - 1)
-                        .map((stop, index) => `
-                            <div class="stop-label ${index === 0 ? 'start-label' : 'end-label'}">
-                                <div class="stop-name">${stop.name}</div>
-                                <div class="stop-time">${stop.time}</div>
-                            </div>
-                        `).join('')}
+                        .map((stop, index) => {
+                            const englishName = stop.name.match(/\((.*?)\)/)?.[1] || stop.name; // Extract English name inside parentheses
+                            return `
+                                <div class="stop-label ${index === 0 ? 'start-label' : 'end-label'}">
+                                    <div class="stop-name">${englishName}</div>
+                                    <div class="stop-time">${stop.time}</div>
+                                </div>
+                            `;
+                        }).join('')}
                 </div>
+
                 
                 <div class="arrival-info">
                     <img src="images/arrowred.png" alt="Arrival Arrow">
                     <div class="time">${bus.arrival.time}</div>
                     <div class="date">${bus.arrival.date}</div>
-                    <div class="location">${bus.arrival.location}</div>
+                    <div class="location">
+                        ${bus.arrival.location.match(/\((.*?)\)/)?.[1] || bus.arrival.location}
+                    </div>
                 </div>
                 
                 <div class="price-details">
@@ -382,25 +391,34 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="info-item">Route Number: <span>${bus.additionalInfo.routeNumber || 'N/A'}</span></div>
                     </div>
                     
-                    <div class="boardings">
-                        <h4>Boardings</h4>
-                        <div class="boardings-list">
-                            ${bus.allStops.map((stop, index) => {
-                                const row = Math.floor(index / 5);
-                                const col = index % 5;
-                                return `
-                                    <div class="boarding-item" style="grid-row: ${row + 1}; grid-column: ${col + 1};">
-                                        <div class="boarding-dot ${
-                                            index === 0 ? 'departure' : 
-                                            index === bus.allStops.length - 1 ? 'arrival' : 
-                                            'intermediate'
-                                        }"></div>
-                                        <span class="stop-name">${stop.name}</span>
-                                        <span class="stop-time">${stop.time}</span>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
+                    <div class="boardings-list">
+                        ${bus.allStops.map((stop, index) => {
+                            const row = Math.floor(index / 4);
+                            const col = index % 4;
+                            const stopName = stop.name.toLowerCase();
+                            const fromLocation = bus.departure.location.toLowerCase();
+                            const toLocation = bus.arrival.location.toLowerCase();
+                            
+                            // Determine stop type based on from/to locations
+                            let stopType = 'intermediate';
+                            let textStyle = '';
+                            
+                            if (stopName === fromLocation) {
+                                stopType = 'departure';
+                                textStyle = 'font-size: 11px; font-weight: bold;';
+                            } else if (stopName === toLocation) {
+                                stopType = 'arrival';
+                                textStyle = 'font-size: 11px; font-weight: bold;';
+                            }
+                            
+                            return `
+                                <div class="boarding-item" style="grid-row: ${row + 1}; grid-column: ${col + 1};">
+                                    <div class="boarding-dot ${stopType}"></div>
+                                    <span class="stop-name" style="${textStyle}">${stop.name}</span>
+                                    <span class="stop-time" style="${textStyle}">${stop.time}</span>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             </div>

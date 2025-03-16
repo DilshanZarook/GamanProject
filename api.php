@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-$conn = new mysqli('localhost', 'root', '', 'bus_booking');
+$conn = new mysqli('localhost', 'root', '', 'SLBus');
 if ($conn->connect_error) {
     die(json_encode(['error' => 'Database connection failed: ' . $conn->connect_error]));
 }
@@ -15,100 +15,65 @@ $busResult = $conn->query($busQuery);
 while ($busRow = $busResult->fetch_assoc()) {
     $bus_id = $busRow['bus_id'];
 
-    // Fetch additional info
-    $additionalInfoQuery = "SELECT * FROM additional_info WHERE bus_id = $bus_id";
-    $additionalInfoResult = $conn->query($additionalInfoQuery);
-    $additionalInfo = $additionalInfoResult->fetch_assoc();
-
-    // Fetch schedule and route details
-    $scheduleQuery = "SELECT s.*, r.route_name, r.route_number, r.route_type 
+    $scheduleQuery = "SELECT s.*, mr.route_name, mr.route_number 
                      FROM schedules s 
-                     JOIN routes r ON s.route_id = r.route_id 
+                     JOIN main_routes mr ON s.route_id = mr.route_id 
                      WHERE s.bus_id = $bus_id";
     $scheduleResult = $conn->query($scheduleQuery);
     $schedule = $scheduleResult->fetch_assoc();
 
-    // Fetch stops with their stop_order to correctly determine segment positions
-    $stopsQuery = "SELECT s.stop_order, s.stop_time, l.name, l.location_id 
-                   FROM stops s 
-                   JOIN locations l ON s.location_id = l.location_id 
-                   WHERE s.schedule_id = {$schedule['schedule_id']} 
-                   ORDER BY s.stop_order";
+    if (!$schedule) {
+        continue;
+    }
+
+    $stopsQuery = "SELECT rs.stop_order, rs.location_id, l.name 
+                   FROM route_stops rs 
+                   JOIN locations l ON rs.location_id = l.location_id 
+                   WHERE rs.route_id = {$schedule['route_id']} 
+                   ORDER BY rs.stop_order";
     $stopsResult = $conn->query($stopsQuery);
     $stops = [];
-    $stopOrderMap = []; // Map location names to their stop order
-    $locationIdMap = []; // Map location names to their location_id
-    $firstStop = null;
-    $lastStop = null;
+    $stopOrderMap = [];
+    $locationIdMap = [];
 
     while ($stopRow = $stopsResult->fetch_assoc()) {
+        $stopTime = $schedule['departure_time']; // Fallback (add stop_time column if needed)
         $stop = [
             'name' => $stopRow['name'],
-            'time' => date('h:i A', strtotime($stopRow['stop_time']))
+            'time' => date('h:i A', strtotime($stopTime))
         ];
         $stops[] = $stop;
         $stopOrderMap[$stopRow['name']] = $stopRow['stop_order'];
         $locationIdMap[$stopRow['name']] = $stopRow['location_id'];
-        
-        if ($firstStop === null) {
-            $firstStop = $stopRow['name'];
-            $firstStopOrder = $stopRow['stop_order'];
-        }
-        $lastStop = $stopRow['name'];
-        $lastStopOrder = $stopRow['stop_order'];
     }
 
-    // Fetch all fares for this schedule
-    $allFaresQuery = "SELECT sf.stop_fare_id, sf.from_location_id, sf.to_location_id, sf.fare,
-                      l1.name AS from_name, l2.name AS to_name
-                      FROM stop_fares sf 
-                      JOIN locations l1 ON sf.from_location_id = l1.location_id 
-                      JOIN locations l2 ON sf.to_location_id = l2.location_id 
-                      WHERE sf.schedule_id = {$schedule['schedule_id']}";
-    $allFaresResult = $conn->query($allFaresQuery);
+    $firstStop = $stops[0]['name'];
+    $lastStop = end($stops)['name'];
 
-    if (!$allFaresResult) {
-        error_log("Fare query failed for schedule_id {$schedule['schedule_id']}: " . $conn->error);
-        $fares = ['error' => 'Fare data not found'];
-    } else {
-        $fares = [];
-        while ($fareRow = $allFaresResult->fetch_assoc()) {
-            $fromName = $fareRow['from_name'];
-            $toName = $fareRow['to_name'];
-            $fareKey = strtolower($fromName) . '-' . strtolower($toName);
-            
-            // Apply special fare logic for specific routes
-            if ($fromName == 'Colombo' && $toName == 'Thorana Junction') {
-                // Get the 4th fare from the table
-                $specificFareQuery = "SELECT fare FROM stop_fares WHERE stop_fare_id = 4 AND schedule_id = {$schedule['schedule_id']}";
-                $specificFareResult = $conn->query($specificFareQuery);
-                if ($specificFareRow = $specificFareResult->fetch_assoc()) {
-                    $fares[$fareKey] = number_format($specificFareRow['fare'], 2) . ' LKR';
+    $fares = [];
+    foreach ($stopOrderMap as $fromName => $fromOrder) {
+        foreach ($stopOrderMap as $toName => $toOrder) {
+            if ($fromOrder < $toOrder) {
+                $difference = $toOrder - $fromOrder;
+                error_log("Calculating fare from $fromName (stop_order: $fromOrder) to $toName (stop_order: $toOrder), difference: $difference");
+
+                // Query fare_master for the fare based on the difference
+                $fareQuery = "SELECT fare FROM fare_master WHERE fare_id = $difference";
+                $fareResult = $conn->query($fareQuery);
+                $fareRow = $fareResult->fetch_assoc();
+
+                if ($fareRow && $fareRow['fare'] !== null) {
+                    $fareKey = strtolower($fromName) . '-' . strtolower($toName);
+                    $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR';
                 } else {
-                    $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR'; // Fallback to original
-                }
-            } 
-            else if ($fromName == 'Thorana Junction' && $toName == 'Kandy') {
-                // Use the fare for ID 56 (60-4)
-                $specificFareQuery = "SELECT fare FROM stop_fares WHERE stop_fare_id = 56 AND schedule_id = {$schedule['schedule_id']}";
-                $specificFareResult = $conn->query($specificFareQuery);
-                if ($specificFareRow = $specificFareResult->fetch_assoc()) {
-                    $fares[$fareKey] = number_format($specificFareRow['fare'], 2) . ' LKR';
-                } else {
-                    // If specific fare not found, calculate it as 60-4
-                    $calculatedFare = 60 - 4;
-                    $fares[$fareKey] = number_format($calculatedFare, 2) . ' LKR';
+                    $fares[strtolower($fromName) . '-' . strtolower($toName)] = '0.00 LKR'; // Default to 0 if no fare
                 }
             }
-            else {
-                // Default behavior for other routes
-                $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR';
-            }
         }
-        
-        if (empty($fares)) {
-            $fares = ['error' => 'No fare data available for this schedule'];
-        }
+    }
+
+    if (empty($fares)) {
+        $fares = ['error' => 'No fare data available for this route'];
     }
 
     error_log("Fares for bus_id $bus_id: " . json_encode($fares));
@@ -119,11 +84,7 @@ while ($busRow = $busResult->fetch_assoc()) {
         'service' => $busRow['service'],
         'amenities' => $busRow['amenities'],
         'image' => $busRow['image'],
-        'route' => [
-            'direction' => 'bus',
-            'start' => $firstStop ?? 'Unknown',
-            'end' => $lastStop ?? 'Unknown'
-        ],
+        'route' => ['direction' => 'bus', 'start' => $firstStop ?? 'Unknown', 'end' => $lastStop ?? 'Unknown'],
         'departure' => [
             'time' => date('h:i A', strtotime($schedule['departure_time'])),
             'date' => date('d M Y', strtotime($schedule['departure_date'])),
@@ -139,12 +100,12 @@ while ($busRow = $busResult->fetch_assoc()) {
         'coffeeBreak' => date('h:i A', strtotime($busRow['coffeeBreak'])),
         'fare' => $fares,
         'additionalInfo' => [
-            'typeOfSeat' => $additionalInfo['typeOfSeat'],
-            'route' => $additionalInfo['route'],
-            'noOfSeats' => $additionalInfo['noOfSeats'],
-            'availability' => $additionalInfo['availability'],
-            'routeNumber' => $additionalInfo['routeNumber'],
-            'rating' => $additionalInfo['rating']
+            'typeOfSeat' => $busRow['type_of_seat'],
+            'route' => $schedule['route_name'],
+            'noOfSeats' => $busRow['no_of_seats'],
+            'availability' => $busRow['availability'],
+            'routeNumber' => $schedule['route_number'],
+            'rating' => $busRow['rating']
         ]
     ];
 }
