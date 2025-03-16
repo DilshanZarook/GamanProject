@@ -28,14 +28,16 @@ while ($busRow = $busResult->fetch_assoc()) {
     $scheduleResult = $conn->query($scheduleQuery);
     $schedule = $scheduleResult->fetch_assoc();
 
-    // Fetch stops
-    $stopsQuery = "SELECT s.stop_time, l.name 
+    // Fetch stops with their stop_order to correctly determine segment positions
+    $stopsQuery = "SELECT s.stop_order, s.stop_time, l.name, l.location_id 
                    FROM stops s 
                    JOIN locations l ON s.location_id = l.location_id 
                    WHERE s.schedule_id = {$schedule['schedule_id']} 
                    ORDER BY s.stop_order";
     $stopsResult = $conn->query($stopsQuery);
     $stops = [];
+    $stopOrderMap = []; // Map location names to their stop order
+    $locationIdMap = []; // Map location names to their location_id
     $firstStop = null;
     $lastStop = null;
 
@@ -45,27 +47,65 @@ while ($busRow = $busResult->fetch_assoc()) {
             'time' => date('h:i A', strtotime($stopRow['stop_time']))
         ];
         $stops[] = $stop;
-        if ($firstStop === null) $firstStop = $stop['name'];
-        $lastStop = $stop['name'];
+        $stopOrderMap[$stopRow['name']] = $stopRow['stop_order'];
+        $locationIdMap[$stopRow['name']] = $stopRow['location_id'];
+        
+        if ($firstStop === null) {
+            $firstStop = $stopRow['name'];
+            $firstStopOrder = $stopRow['stop_order'];
+        }
+        $lastStop = $stopRow['name'];
+        $lastStopOrder = $stopRow['stop_order'];
     }
 
-    // Fetch fares from stop_fares table
-    $fareQuery = "SELECT l1.name AS from_name, l2.name AS to_name, sf.fare 
-                  FROM stop_fares sf 
-                  JOIN locations l1 ON sf.from_location_id = l1.location_id 
-                  JOIN locations l2 ON sf.to_location_id = l2.location_id 
-                  WHERE sf.schedule_id = {$schedule['schedule_id']}";
-    $fareResult = $conn->query($fareQuery);
+    // Fetch all fares for this schedule
+    $allFaresQuery = "SELECT sf.stop_fare_id, sf.from_location_id, sf.to_location_id, sf.fare,
+                      l1.name AS from_name, l2.name AS to_name
+                      FROM stop_fares sf 
+                      JOIN locations l1 ON sf.from_location_id = l1.location_id 
+                      JOIN locations l2 ON sf.to_location_id = l2.location_id 
+                      WHERE sf.schedule_id = {$schedule['schedule_id']}";
+    $allFaresResult = $conn->query($allFaresQuery);
 
-    if (!$fareResult) {
+    if (!$allFaresResult) {
         error_log("Fare query failed for schedule_id {$schedule['schedule_id']}: " . $conn->error);
         $fares = ['error' => 'Fare data not found'];
     } else {
         $fares = [];
-        while ($fareRow = $fareResult->fetch_assoc()) {
-            $fareKey = strtolower($fareRow['from_name']) . '-' . strtolower($fareRow['to_name']);
-            $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR';
+        while ($fareRow = $allFaresResult->fetch_assoc()) {
+            $fromName = $fareRow['from_name'];
+            $toName = $fareRow['to_name'];
+            $fareKey = strtolower($fromName) . '-' . strtolower($toName);
+            
+            // Apply special fare logic for specific routes
+            if ($fromName == 'Colombo' && $toName == 'Thorana Junction') {
+                // Get the 4th fare from the table
+                $specificFareQuery = "SELECT fare FROM stop_fares WHERE stop_fare_id = 4 AND schedule_id = {$schedule['schedule_id']}";
+                $specificFareResult = $conn->query($specificFareQuery);
+                if ($specificFareRow = $specificFareResult->fetch_assoc()) {
+                    $fares[$fareKey] = number_format($specificFareRow['fare'], 2) . ' LKR';
+                } else {
+                    $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR'; // Fallback to original
+                }
+            } 
+            else if ($fromName == 'Thorana Junction' && $toName == 'Kandy') {
+                // Use the fare for ID 56 (60-4)
+                $specificFareQuery = "SELECT fare FROM stop_fares WHERE stop_fare_id = 56 AND schedule_id = {$schedule['schedule_id']}";
+                $specificFareResult = $conn->query($specificFareQuery);
+                if ($specificFareRow = $specificFareResult->fetch_assoc()) {
+                    $fares[$fareKey] = number_format($specificFareRow['fare'], 2) . ' LKR';
+                } else {
+                    // If specific fare not found, calculate it as 60-4
+                    $calculatedFare = 60 - 4;
+                    $fares[$fareKey] = number_format($calculatedFare, 2) . ' LKR';
+                }
+            }
+            else {
+                // Default behavior for other routes
+                $fares[$fareKey] = number_format($fareRow['fare'], 2) . ' LKR';
+            }
         }
+        
         if (empty($fares)) {
             $fares = ['error' => 'No fare data available for this schedule'];
         }
