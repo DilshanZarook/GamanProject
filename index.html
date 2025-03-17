@@ -44,6 +44,11 @@
                     <div class="notification">
                         <i class="fa-solid fa-bell"></i>
                     </div>
+                    <!-- Theme Toggle Button -->
+                    <div class="theme-toggle">
+                        <i class="fa-solid fa-sun"></i>
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
                     <div class="user-profile">
                         <span class="user-name">Admin Name</span>
                         <span class="language">En</span>
@@ -91,9 +96,8 @@
                                 </button>
                                 <button id="search-button" class="search-button">
                                     <i class="fa fa-search" aria-hidden="true"></i>
-                                  </button>                                  
+                                </button>                                  
                             </div>
-
 
                             <div class="advanced-options-container">
                                 <!-- Single Advanced Options Menu -->
@@ -106,7 +110,6 @@
                                             </div>
                                         </div>
                                         <div class="transport-options">
-                                            
                                             <div class="mode-static">
                                                 <div class="mode-option active" data-mode="bus">
                                                     <i class="fa-solid fa-bus"></i>
@@ -143,5 +146,32 @@
     </div>
 
     <script src="script.js"></script>
+    <!-- Add the theme toggle script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const body = document.body;
+
+            // Check for saved theme preference in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.classList.add('dark');
+            }
+
+            // Toggle theme on click
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                themeToggle.classList.toggle('dark');
+
+                // Save the theme preference to localStorage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

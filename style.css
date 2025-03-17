@@ -7,6 +7,7 @@
 }
 
 :root {
+    /* Light Mode Variables */
     --primary-color: #FF5722;
     --secondary-color: #333333;
     --background-color: #f5f5f5;
@@ -23,6 +24,26 @@
     --sidebar-bg: #2c3e50;
     --card-bg: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --primary-color: #FF7043; /* Slightly lighter orange for better contrast */
+    --secondary-color: #E0E0E0; /* Light gray for text */
+    --background-color: #1A1A1A; /* Dark background */
+    --white: #2C2C2C; /* Darker "white" for backgrounds */
+    --light-gray: #444444; /* Darker gray for hover effects */
+    --light-gray-border: #555555; /* Darker border */
+    --text-color: #E0E0E0; /* Light text color */
+    --secondary-text: #AAAAAA; /* Lighter gray for secondary text */
+    --green-timeline: #66BB6A; /* Slightly brighter green */
+    --yellow-timeline: #FFCA28; /* Slightly brighter yellow */
+    --red-timeline: #EF5350; /* Slightly brighter red */
+    --whatsapp-green: #25D366; /* Keep WhatsApp green as is */
+    --button-orange: #FF7043; /* Slightly lighter orange for buttons */
+    --sidebar-bg: #121212; /* Darker sidebar */
+    --card-bg: #2C2C2C; /* Darker card background */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
 }
 
 body {
@@ -149,6 +170,33 @@ body {
     width: 20px;
     height: 15px;
     border-radius: 2px;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.theme-toggle .fa-sun {
+    color: var(--secondary-text);
+    display: inline;
+}
+
+.theme-toggle .fa-moon {
+    color: var(--secondary-text);
+    display: none;
+}
+
+.theme-toggle.dark .fa-sun {
+    display: none;
+}
+
+.theme-toggle.dark .fa-moon {
+    display: inline;
 }
 
 /* Search Section Styles */
@@ -326,7 +374,7 @@ body {
 }
 
 .additional-search-btn:hover {
-    background-color: #e0e0e0;
+    background-color: var(--light-gray);
     color: var(--text-color);
 }
 
@@ -363,6 +411,10 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+body.dark-mode .advanced-menu.active {
+    background-color: rgba(44, 44, 44, 0.2); /* Dark transparent background */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
+}
 
 .advanced-option-content {
     padding: 15px;
@@ -438,6 +490,10 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
+body.dark-mode .class-option.selected {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
 .class-option[data-class="Normal"] {
     background-color: #FF7043;
 }
@@ -468,7 +524,7 @@ body {
 }
 
 .search-button:hover {
-    background-color: #e0e0e0;
+    background-color: var(--light-gray);
     color: var(--text-color);
 }
 
@@ -480,7 +536,6 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 15px;
-    
 }
 
 .bus-item {
@@ -500,15 +555,18 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+body.dark-mode .bus-item:hover {
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+}
+
 .bus-item .main-content {
     display: flex;
     flex-direction: row;
     padding: 15px;
-    background-color: white;
+    background-color: var(--card-bg);
 }
 
 .bus-details {
-    
     margin: auto;
     width: 150px;
     padding: 15px;
@@ -522,7 +580,6 @@ body {
     color: var(--secondary-color);
     margin-right: 10px;
     white-space: nowrap; /* Prevent text wrapping */
-
 }
 
 .bus-type {
@@ -602,6 +659,10 @@ body {
     border-radius: 3px;
 }
 
+body.dark-mode .route-line {
+    background: #555555;
+}
+
 .stop-point {
     position: absolute;
     width: 19px;
@@ -630,7 +691,6 @@ body {
     border-width: 5px; /* Increase border size */
     border-color: #f69267;
     background-color: #ff4d00;
-
 }
 
 .middle-point {
@@ -647,7 +707,6 @@ body {
     background-color: var(--red-timeline);
 }
 
-
 .coffee-break {
     position: absolute;
     top: -30px;
@@ -658,6 +717,10 @@ body {
 .coffee-break i {
     color: #795548;
     font-size: 14px;
+}
+
+body.dark-mode .coffee-break i {
+    color: #A1887F;
 }
 
 .coffee-time {
@@ -783,6 +846,10 @@ body {
     border-top: 1px solid var(--light-gray);
     width: 100%;
     padding: 0 15px;
+}
+
+body.dark-mode .additional-info-panel {
+    background-color: #333333;
 }
 
 .additional-info-panel.active {
@@ -918,7 +985,6 @@ body {
     }
 }
 
-
 .additional-info-panel {
     max-height: 0;
     overflow: hidden;
@@ -979,10 +1045,6 @@ body {
 
 .autocomplete-list div:hover,
 .autocomplete-list div.highlighted {
-    background-color: #e0e0e0; /* Hover-like background */
-    color: #333333; /* Ensure text remains readable */
+    background-color: var(--light-gray);
+    color: var(--text-color);
 }
-
-
-
-
