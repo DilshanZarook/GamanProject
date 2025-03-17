@@ -282,8 +282,16 @@ body {
     color: var(--secondary-text);
 }
 
-.date-picker input[type="date"], .time-picker input[type="time"] {
+.date-picker input[type="date"]{
     padding: 10px 85px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: var(--white);
+}
+
+.time-picker input[type="time"]{
+    padding: 10px 20px;
     border: 1px solid var(--light-gray);
     border-radius: 5px;
     font-size: 14px;
@@ -297,7 +305,7 @@ body {
 
 .button-group {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     align-items: center;
 }
 
@@ -306,7 +314,7 @@ body {
     display: flex;
     align-items: center;
     gap: 30px;
-    padding: 11px 70px;
+    padding: 11px 40px;
     background-color: #FF5722;
     border: 1px solid var(--light-gray);
     border-radius: 5px;
@@ -334,7 +342,7 @@ body {
 .advanced-menu {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 62px;
     background-color: var(--white);
     /* border: 1px solid var(--light-gray); */
     border-radius: 5px;
@@ -343,12 +351,18 @@ body {
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     z-index: 10;
-    width: 300px; /* Adjust width as needed */
+    width: 238px; /* Adjust width as needed */
 }
 
 .advanced-menu.active {
     max-height: 300px; /* Adjust based on content height */
+    background-color: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    backdrop-filter: blur(10px); /* Glass effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 10px; /* Smooth edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
+
 
 .advanced-option-content {
     padding: 15px;
@@ -360,7 +374,7 @@ body {
 .transport-options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .mode-static {
@@ -441,10 +455,11 @@ body {
 }
 
 .search-button {
-    padding: 8px 25px;
-    background-color: var(--primary-color);
+    padding: 11px 15px;
+    background-color: #FF5722;
+    border: 1px solid var(--light-gray);
     color: var(--white);
-    border: none;
+    border: 1px solid var(--light-gray);
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
@@ -453,7 +468,8 @@ body {
 }
 
 .search-button:hover {
-    background-color: #e64a19;
+    background-color: #e0e0e0;
+    color: var(--text-color);
 }
 
 /* Search Results Styles */
@@ -953,6 +969,18 @@ body {
 
 .direction-arrow i {
     font-size: 16px;
+}
+
+.autocomplete-list div {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.autocomplete-list div:hover,
+.autocomplete-list div.highlighted {
+    background-color: #e0e0e0; /* Hover-like background */
+    color: #333333; /* Ensure text remains readable */
 }
 
 

@@ -123,31 +123,92 @@ document.addEventListener('DOMContentLoaded', function() {
     // Autocomplete function
     function showAutocomplete(input, autocompleteList, locations) {
         if (!input || !autocompleteList) return;
+    
+        let highlightedIndex = -1; // Track the currently highlighted suggestion
+    
+        // Function to update the highlighted suggestion with hover-like styling
+        function updateHighlight(newIndex, suggestions) {
+            const suggestionItems = autocompleteList.querySelectorAll('div');
+            // Remove highlight from all items
+            suggestionItems.forEach(item => item.classList.remove('highlighted'));
+            // Ensure the new index is within bounds
+            if (newIndex >= 0 && newIndex < suggestions.length) {
+                highlightedIndex = newIndex;
+                suggestionItems[highlightedIndex].classList.add('highlighted');
+                // Scroll the highlighted item into view smoothly
+                suggestionItems[highlightedIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            } else {
+                highlightedIndex = -1;
+            }
+            console.log(`Highlighted index: ${highlightedIndex}`); // Debug log
+        }
+    
+        // Handle input changes (typing)
         input.addEventListener('input', function() {
             const value = this.value.toLowerCase();
             autocompleteList.innerHTML = '';
+            highlightedIndex = -1; // Reset highlight on new input
+    
             if (value) {
                 const suggestions = locations.filter(loc => loc.toLowerCase().includes(value));
-                suggestions.forEach(suggestion => {
-                    const div = document.createElement('div');
-                    div.textContent = suggestion;
-                    div.addEventListener('click', function() {
-                        input.value = suggestion;
-                        autocompleteList.style.display = 'none';
-                        performSearch();
+                if (suggestions.length > 0) {
+                    suggestions.forEach((suggestion, index) => {
+                        const div = document.createElement('div');
+                        div.textContent = suggestion;
+                        // Add click event for mouse selection
+                        div.addEventListener('click', function() {
+                            input.value = suggestion;
+                            autocompleteList.style.display = 'none';
+                            performSearch();
+                        });
+                        // Add mouse hover to highlight
+                        div.addEventListener('mouseover', function() {
+                            updateHighlight(index, suggestions);
+                        });
+                        autocompleteList.appendChild(div);
                     });
-                    autocompleteList.appendChild(div);
-                });
-                autocompleteList.style.display = suggestions.length > 0 ? 'block' : 'none';
+                    autocompleteList.style.display = 'block';
+                    updateHighlight(0, suggestions); // Highlight the first item by default
+                } else {
+                    autocompleteList.style.display = 'none';
+                }
             } else {
                 autocompleteList.style.display = 'none';
                 performSearch();
             }
         });
-
+    
+        // Handle keyboard navigation
+        input.addEventListener('keydown', function(e) {
+            const suggestions = autocompleteList.querySelectorAll('div');
+            if (!suggestions.length || autocompleteList.style.display === 'none') return; // No suggestions, exit
+    
+            if (e.key === 'ArrowDown') {
+                e.preventDefault(); // Prevent default scrolling
+                const newIndex = highlightedIndex < suggestions.length - 1 ? highlightedIndex + 1 : 0;
+                updateHighlight(newIndex, suggestions);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault(); // Prevent default scrolling
+                const newIndex = highlightedIndex > 0 ? highlightedIndex - 1 : suggestions.length - 1;
+                updateHighlight(newIndex, suggestions);
+            } else if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission
+                if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+                    input.value = suggestions[highlightedIndex].textContent;
+                    autocompleteList.style.display = 'none';
+                    performSearch();
+                }
+            } else if (e.key === 'Escape') {
+                autocompleteList.style.display = 'none';
+                highlightedIndex = -1;
+            }
+        });
+    
+        // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
             if (!input.contains(e.target) && !autocompleteList.contains(e.target)) {
                 autocompleteList.style.display = 'none';
+                highlightedIndex = -1;
             }
         });
     }
